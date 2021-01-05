@@ -1,0 +1,66 @@
+\chapter{Grundlagen der Wahrscheinlichkeitstheorie}
+
+Die Wahrscheinlichkeitstheorie ist ein Teilgebiet der Mathematik, dass sich mit
+der Formalisierung, Modellierung und Untersuchung von zufälligen Vorgängen
+beschäftigt (\href{https://de.wikipedia.org/wiki/Wahrscheinlichkeitstheorie}
+{Wikipedia}).
+
+\section{Zufallsversuch, Ereignis, Zufallsvariable}
+
+\begin{definition}[Zufallsversuch]
+Ein Versuch oder Vorgang, der unter genau festgelegten Versuchsbedingungen
+durchgeführt einen zufälligen Ausgang besitzt, wird als \defw{Zufallsversuch}
+(auch: \altname{Zufallsexperiment} oder \altname{Wahrscheinlichkeitsexperiment})
+bezeichnet.
+\end{definition}
+
+\begin{definition}[Ergebnismenge]
+Alle möglichen Ausgänge eines Zufallsversuchs bilden die \defw{Ergebnismenge}
+$\Omega$ (auch: \altname{Grundraum}). Die Elemente der Ergebnismenge werden auch als
+\altname{Elementarereignisse} bezeichnet.
+\end{definition}
+
+\begin{definition}[Ereignis]
+Eine Teilmenge $A$ von $\Omega$ wird als Ereignis bezeichnet. Dabei bezeichnet
+$A = \Omega$ das sichere Ereignis, dass immer eintritt und $A = \emptyset$ das
+unmögliche Ereignis.
+\end{definition}
+
+\defw{Beispiel:} Würfelwurf mit $\Omega = \{1,2,3,4,5,6\}$ mit Ereignissen
+"`ungerade Augenzahl"' $A_1 = \{1,3,5\}$ und "`2 oder 3"' $A_2 = \{2,3\}$.
+
+\begin{definition}[Zufallsvariable]
+Eine Funktion $X: \Omega \to R$ wird als \defw{Zufallsvariable}
+bezeichnet. Die Zufallsvariable ordnet jedem Elementarereignis eine reelle Zahl
+zu.
+
+Der Wertebereich der Zufallszahl wird als \altname{Zustandsraum} $S = X(\Omega)$
+bezeichnet.
+\end{definition}
+
+\section{Wahrscheinlichkeit}
+
+Die \emph{Wahrscheinlichkeit} eines Ereignisses lässt sich auch statistisch als
+relative Häufigkeit des Auftretens im Verhältnis zur Anzahl der durchgeführten
+Versuche des Zufallsexperiments beschreiben. Um die Wahrscheinlichkeit auf diese
+Weise zuverlässig bestimmen zu können, müssen sehr viele Zufallsversuche
+durchgeführt werden. Etwas "`mathematischer"' ist folgende Definition:
+
+\begin{definition}[Wahrscheinlichkeit]
+Sei $\mathcal{A}$ eine Menge von Ereignissen auf einem Grundraum $\Omega$. Eine
+Abbildung
+
+\[ P: \mathcal{A} \to 0,1 \]
+
+heißt \defw{Wahrscheinlichkeit}, wenn sie folgende Bedingungen erfüllt:
+
+\[\forall A \subseteq \Omega: 0 \leq P(A) \leq 1\]
+\[P(\Omega) = 1\]
+\[\forall A_1, A_2, ... A_n \subseteq \Omega\ paarweise\ disjunkt:
+P(\bigcup_{i=1}^{n} A_i) = \sum_{i=1}^{n}P(A_i))\]
+\end{definition}
+
+Wahrscheinlichkeiten von Ereignissen sind also immer Werte im Bereich von 0
+(unmöglich) und 1 (sicher). Zusätzlich kann man die Wahrscheinlichkeit eines
+nicht-elementaren Ereignisses durch Zerlegung in disjunkte Teilereignisse
+berechnen.

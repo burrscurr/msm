@@ -10,6 +10,29 @@
 \usepackage{hyperref}
 
 \usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\newtheoremstyle{spaced}
+  {2.5}% space above
+  {2.5}% space below
+  {}% body font
+  {}% indent
+  {\bfseries}%
+  {}%
+  {\newline}{}%
+\theoremstyle{spaced}
+\newtheorem{definition}{Definition}
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+
+% style highlighting a word that was just defined
+\newcommand{\defw}{\emph}
+% style for alternative names, for instance in definitions
+\newcommand{\altname}{\emph}
 
 \title{Mathematisch-Stochastische Modelle: Markov-Ketten und Monte-Carlo-Simulationen}
 \author{Max Ziermann}
@@ -20,5 +43,5 @@
 
   \tableofcontents
 
-  \input{content.tex}  
+  \input{probability-theory.tex}
 \end{document}
