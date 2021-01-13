@@ -7,27 +7,68 @@ beschäftigt (\href{https://de.wikipedia.org/wiki/Wahrscheinlichkeitstheorie}
 
 \section{Zufallsversuch, Ereignis, Zufallsvariable}
 
-\begin{definition}[Zufallsversuch]
+\begin{definition}[Zufallsversuch]\label{def:zufallsversuch}
 Ein Versuch oder Vorgang, der unter genau festgelegten Versuchsbedingungen
 durchgeführt einen zufälligen Ausgang besitzt, wird als \defw{Zufallsversuch}
 (auch: \altname{Zufallsexperiment} oder \altname{Wahrscheinlichkeitsexperiment})
 bezeichnet.
 \end{definition}
 
-\begin{definition}[Ergebnismenge]
-Alle möglichen Ausgänge eines Zufallsversuchs bilden die \defw{Ergebnismenge}
-$\Omega$ (auch: \altname{Grundraum}). Die Elemente der Ergebnismenge werden auch als
-\altname{Elementarereignisse} bezeichnet.
+
+\begin{definition}[Grundraum]\label{def:grundraum}
+Alle möglichen Ausgänge eines \hyperref[def:zufallsversuch]{Zufallsversuchs}
+bilden den \defw{Grundraum} $\Omega$ (auch: \altname{Ergebnismenge}). Die
+Elemente des Grundraums werden als \altname{Elementarereignisse} bezeichnet.
 \end{definition}
 
-\begin{definition}[Ereignis]
+
+\begin{definition}[Ereignis]\label{def:ereignis}
 Eine Teilmenge $A$ von $\Omega$ wird als Ereignis bezeichnet. Dabei bezeichnet
 $A = \Omega$ das sichere Ereignis, dass immer eintritt und $A = \emptyset$ das
 unmögliche Ereignis.
 \end{definition}
 
-\defw{Beispiel:} Würfelwurf mit $\Omega = \{1,2,3,4,5,6\}$ mit Ereignissen
-"`ungerade Augenzahl"' $A_1 = \{1,3,5\}$ und "`2 oder 3"' $A_2 = \{2,3\}$.
+\begin{example}\label{bsp:ereignis}
+Würfeln mit einem einfachen Würfel. Der \hyperref[def:grundraum]{Grundraum}
+$\Omega = \{1,2,3,4,5,6\}$
+sind die Augenzahlen des Würfels. Ein Ereignis $A_1 = \{1,3,5\}$ beschreibt das
+eine ungerade Augenzahl, $A_2 = \{5,6\}$ das
+eine Augenzahl $\ge 5$ gewürfelt wird.
+\end{example}
+
+
+\begin{definition}[Ereignisalgebra]\label{def:ereignisalgebra}
+Eine Menge von Ereignissen bezogen auf einen \hyperref[def:grundraum]{Grundraum}
+$\Omega$ bildet eine \defw{Ereignisalgebra} oder \altname{Ereignissystem}, wenn gilt:
+
+  \begin{itemize}
+    \item Das sichere und das unmögliche Ereignis sind teil der Ergebnisalgebra.
+    \item{Für jedes Ereignis $A$ gibt es ein komplementäres Ereignis $A^C =
+\Omega \\ A$ Teil der Ergebnisalgebra}
+    \item{Für jedes Ereignispaar $A,B$ ist sowohl das Ereignis "`A und B treten
+ein"' als auch "`A oder B treten ein"' Teil der Ergebnisalgebra}
+  \end{itemize}
+
+Die Ergebnisalgebra ist also unter den Operationen Komplementbildung, $\cup$ und
+$\cap$ abgeschlossen.
+\end{definition}
+
+\begin{example}
+Durch die Definition der Ereignisalgebra muss nicht immer die gesamte Potenzmenge
+eines Grundraums betrachtet werden. Im Beispiel des Würfelwurfs ($\Omega =
+\{1,2,3,4,5,6\}$) bildet auch
+\[\{\emptyset, \Omega, \{1,3,5\}, \{2,4,6\}\}\]
+
+eine Ereignisalgebra. Da die paarweise Verknüpfung mit $\cup$ und $\cap$ bzw. das
+Komplement eines Ereignisses immer auch in der Algebra vorhanden sind und ein
+sicheres und unmögliches Ereignis vorhanden sind, lässt sich bereits sinnvolle
+Wahrscheinlichkeitsbetrachtungen anstellen.
+
+Die Ereignisse $A_1, A_2, \Omega, \emptyset$ aus Beispiel \ref{bsp:ereignis}
+bilden keine Ereignisalgebra, da (unter anderem) $A_1 \cup A_2 = \{3\}$ ein
+neues Ereignis ergibt.
+\end{example}
+
 
 \begin{definition}[Zufallsvariable]
 Eine Funktion $X: \Omega \to R$ wird als \defw{Zufallsvariable}
@@ -44,16 +85,15 @@ Die \emph{Wahrscheinlichkeit} eines Ereignisses lässt sich auch statistisch als
 relative Häufigkeit des Auftretens im Verhältnis zur Anzahl der durchgeführten
 Versuche des Zufallsexperiments beschreiben. Um die Wahrscheinlichkeit auf diese
 Weise zuverlässig bestimmen zu können, müssen sehr viele Zufallsversuche
-durchgeführt werden. Etwas "`mathematischer"' ist folgende Definition:
+durchgeführt werden. Etwas "`mathematischer"' ist folgende (axiomatische)
+Definition:
 
 \begin{definition}[Wahrscheinlichkeit]
-Sei $\mathcal{A}$ eine Menge von Ereignissen auf einem Grundraum $\Omega$. Eine
-Abbildung
-
+Sei $\mathcal{A}$ eine \hyperref[def:ereignisalgebra]{Ereignisalgebra} auf einem
+\hyperref[def:grundraum]{Grundraum} $\Omega$. Eine Abbildung
 \[ P: \mathcal{A} \to 0,1 \]
 
 heißt \defw{Wahrscheinlichkeit}, wenn sie folgende Bedingungen erfüllt:
-
 \[\forall A \subseteq \Omega: 0 \leq P(A) \leq 1\]
 \[P(\Omega) = 1\]
 \[\forall A_1, A_2, ... A_n \subseteq \Omega\ paarweise\ disjunkt:

@@ -14,8 +14,8 @@
 \usepackage{amssymb}
 
 \newtheoremstyle{spaced}
-  {2.5}% space above
-  {2.5}% space below
+  {1.25}% space above
+  {1.25}% space below
   {}% body font
   {}% indent
   {\bfseries}%
@@ -23,6 +23,20 @@
   {\newline}{}%
 \theoremstyle{spaced}
 \newtheorem{definition}{Definition}
+
+% examples
+
+\newtheoremstyle{examplestyle}
+  {0.5}% space above
+  {0}% space below
+  {}% body font
+  {}% indent
+  {\itshape}%
+  {}%
+  { }% no newline after 'Beispiel'
+  {\thmname{#1}.}% don't print a example number
+\theoremstyle{examplestyle}
+\newtheorem{example}{Beispiel}
 
 
 \newcommand{\N}{\mathbb{N}}
@@ -33,6 +47,7 @@
 \newcommand{\defw}{\emph}
 % style for alternative names, for instance in definitions
 \newcommand{\altname}{\emph}
+
 
 \title{Mathematisch-Stochastische Modelle: Markov-Ketten und Monte-Carlo-Simulationen}
 \author{Max Ziermann}
