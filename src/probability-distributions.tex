@@ -1,0 +1,146 @@
+\chapter{Wahrscheinlichkeitsverteilungen}
+
+\begin{definition}[Wahrscheinlichkeitsverteilung]\label{def:verteilung}
+Sei $A$ eine \link{def:ealg}{Ereignisalgebra}, $X$ eine \link{def:zvar}{Zufallsvariable}
+mit Zustandsraum $S$. Dann heißt Funktion $P: S \rightarrow [0,1]$ definiert
+durch
+\[P(A) = P(X^{-1}(A)), A \in S\]
+
+eine \defw{Wahrscheinlichkeitsverteilung}. Eine Verteilung einer stetigen
+Zufallsvariable wird als \defw{stetige Verteilung}, die einer diskreten
+Zufallsvariable als \defw{diskrete Verteilung} bezeichnet.
+\end{definition}
+
+Hinweis: Diese Definition beschreibt eigentlich die Verteilung einer
+Zufallsvariablen. Da in der Regel aber nicht der Grundraum eines
+Zufallsexperiments, sondern eine Zusammenfassung (z.B. in Form einer
+Zufallsvariablen) betrachtet wird, kann man sich etwas Definitionsaufwand
+sparen.
+
+\section{Diskrete Verteilungen}
+
+Im Folgenden Abschnitt sei $X$ eine diskrete \link{def:zvar}{Zufallsvariable}
+mit Zustandsraum $S$, $A \in S$ und $P$ eine
+\link{def:verteilung}{Wahrscheinlichkeitsverteilung} dieser Zufallsvariable.
+
+
+\subsection{Gleichverteilung}
+
+Die Gleichverteilung ist eine sehr einfache Verteilung, bei der jeder Wert der
+Zufallsvariable mit der gleichen Wahrscheinlichkeit auftritt:
+\[P(A) = \frac{|A|}{|S|}\]
+
+
+\subsection{Bernoulli-Verteilung ($B(p)$)}
+
+Die Bernoulli-Verteilung beschreibt eine Zufallsvariable, die nur zwei mögliche
+Zustände besitzt, hier bezeichnet als $S = \{0,1\}$. Der beliebig, aber fest
+gewählte Ausgang $A$ besitzt die Wahrscheinlichkeit $0 \le p \le 1$, sodass
+gilt:
+\[P(X=1)=p\]
+\[P(X=0)=1-p\]
+
+
+\subsection{Binomialverteilung ($B(n,p)$)}
+
+Die Binomialverteilung beschreibt die $n$-fache Durchführung eines Experiments
+mit nur zwei komplementären Ausgängen werden. Die Zufallsvariable $X$ gibt an,
+wie oft bei $n$-facher Wiederholung der beliebig, aber fest gewählte Ausgang $A$
+eintritt. Damit kann $X$ die Werte $0, ..., n$ annehmen. Die Wahrscheinlichkeit
+$p$ des Eintretens des gewählten Ausgangs bleibt dabei über alle $n$
+Wiederholunge gleich. Es gilt:
+\[P(X=k) = \binom{n}{k}p^k(1-p)^\{n-k\}\]
+
+
+\subsection{Geometrische Verteilung ($Geo(p)$)}
+
+Eine geometrische Verteilung entsteht durch die Wiederholung eines
+Wahrscheinlichkeitsexperiments mit zwei komplementären Ausgängen. Die
+Zufallsvariable $X$ beschreibt die Anzahl an Versuchen, die durchgeführt werden
+müssen, bis der beliebig, aber fest gewählte Ausgang $B$ eintritt.
+
+Der Zustandsraum von $X$ ist damit $\N_0$. Sei $p$ die Wahrscheinlichkeit, dass
+Ausgang $B$ eintritt. Die Wahrscheinlichkeit, dass nach $k$ Wiederholungen der
+Ausgang $B$ das erste mal auftritt, ist:
+\[P(X=k) = (1-p)^kp\]
+
+
+\subsection{Poisson-Verteilung ($Poi(\lambda)$)}
+
+Die Poisson-Verteilung entsteht bei Vorgängen, die im Durchschnitt mit
+konstanter Rate $\lambda \in (0, \infty)$ in einem beliebigen, aber
+festen Zeitintervall auftreten. Die Zufallsvariable $X$ beschreibt, wie viele
+Vorgänge tatächlich in dem Zeitintervall aufgetreten sind, sodass $S=\N_0$ gilt.
+
+Die Wahrscheinlichkeit, dass in dem Zeitintervall genau $k$ Vorgänge
+stattfinden, beträgt:
+\[P(X=k) = \frac{\lambda^k}{k!}\,\e^{-\lambda}\]
+
+
+\section{Stetige Verteilungen}
+
+\begin{definition}[Wahrscheinlichkeitsdichte]\label{def:dichte}
+Sei $X$ eine stetige \link{def:zvar}{Zufallsvariable} mit Zustandsraum $S$.
+Eine Funktion $\rho: \R \rightarrow \R$ heißt \defw{Wahrscheinlichkeitsdichte},
+wenn gilt:
+\begin{align*}
+  \forall x: \rho(x) \ge 0 \\
+  \int \rho(x) \,\mathrm{d}x = 1
+\end{align*}
+\end{definition}
+
+Die Wahrscheinlichkeitsdichte kann verwendet werden, um die Wahrscheinlichkeit,
+dass X bestimmte Werte annimmt, zu berechnen ($a,b\in\R$):
+\begin{align*}
+  P(X < b) = \int_{-\infty}^{b}\rho(x)\,\mathrm{d}x\\
+  P(a<X<b) = \int_{a}^{b}\rho(x)\,\mathrm{d}x\\
+  P(X < b) = \int^{\infty}_{b}\rho(x)\,\mathrm{d}x
+\end{align*}
+
+Im Folgenden Abschnitt sei $X$ eine stetige \link{def:zvar}{Zufallsvariable}
+mit Zustandsraum $S$, $A \in S$ und $P$ eine
+\link{def:verteilung}{Wahrscheinlichkeitsverteilung} dieser Zufallsvariable.
+
+
+\subsection{Gleichverteilung ($U(a,b)$)}
+
+Die gleichverteilte Zufallsvariable $X$ nimmt die Werte $S=(a,b)$ an. Für die
+Wahrscheinlichkeitsdichte gilt:
+\[\rho(x) = \frac{1}{b-a}\cdot\mathbb{I}_{(a,b)}(x)\]
+
+Dabei bezeichnet $\mathbb{I}_{(a,b)}$ die \defw{Indikatorfunktion}, die Werte im
+Intervall von $(a,b)$ auf $1$ und alle anderen Werte auf $0$ abbildet.
+
+
+\subsection{Exponentialverteilung ($Exp(\lambda)$)}
+
+Für eine Exponentialverteilung mit konstanter Ereignisrate $\lambda>0$ gilt:
+\[\rho(x) = \lambda \e^{-\lambda x}\cdot\mathbb{I}_{(0, \infty)}\]
+
+\subsection{Normalverteilung ($N(\mu, \sigma^2)$)}
+
+In der Natur kommen Normalverteilungen vor wenn sich eine große Anzahl
+unabhängiger Verteilungen überlagern. Für die Wahrscheinlichkeitsdichte gilt:
+\[\rho(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\,exp(-\frac{(x-\mu)^2}{2\sigma^2})\]
+
+
+\subsection{Standardnormalverteilung ($N(0,1)$)}
+
+Eine standardnormalverteilte Zufallsvariable nimmt im Mittel den Wert $0$ mit
+einer Varianz von $1$ an. Es gilt:
+\[\rho(x) = \frac{1}{\sqrt{2\pi}}exp(-\frac{x^2}{2})\]
+
+Die Wahrscheinlichkeit
+\[P(X \le z) = \int_{-\infty}^{z}\rho(x)\,\mathrm{d}x\]
+
+wird auch mit $\Phi(z)$ bezeichnet.
+
+Ist $X$ normalverteilt mit $\mu$ und $\sigma^2$, dann ist die Zufallsvariable
+\[Z=\frac{X-\mu}{\sigma}\]
+
+standardnormalverteilt. Es gilt:
+\begin{align*}
+P(X>a) &= 1 - \Phi\Big(\frac{a-\mu}{\sigma}\Big) \\
+P(X\le b) &= \Phi\Big(\frac{b-\mu}{\sigma}\Big) \\
+P(a < X < b) &= \Phi\Big(\frac{b-\mu}{\sigma}\Big) - \Phi\Big(\frac{a-\mu}{\sigma}\Big)
+\end{align*}
