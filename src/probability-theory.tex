@@ -5,7 +5,7 @@ der Formalisierung, Modellierung und Untersuchung von zufälligen Vorgängen
 beschäftigt (\href{https://de.wikipedia.org/wiki/Wahrscheinlichkeitstheorie}
 {Wikipedia}).
 
-\section{Zufallsversuch, Ereignis, Zufallsvariable}
+\section{Grundbegriffe}
 
 \begin{definition}{Zufallsversuch}{zufallsversuch}
 Ein Versuch oder Vorgang, der unter genau festgelegten Versuchsbedingungen
@@ -69,19 +69,6 @@ neues Ereignis ergibt.
 \end{example}
 
 
-\begin{definition}{Zufallsvariable}{zvar}
-Eine Funktion $X: \Omega \to \R$ wird als \defw{Zufallsvariable}
-bezeichnet. Die Zufallsvariable ordnet jedem Ereignis einer
-\link{def:ealg}{Ereignisalgebra} eine reelle Zahl zu.
-
-Der Wertebereich der Zufallszahl wird als \altname{Zustandsraum} $S = X(\Omega)$
-bezeichnet.
-
-Ist $S$ endlich oder abzählbar unendlich, wird die Zufallsvariable als
-\defw{diskret}, ist $S$ überabzählbar unendlich als \defw{stetig} bezeichnet.
-\end{definition}
-
-
 \section{Wahrscheinlichkeit}
 
 Die \emph{Wahrscheinlichkeit} eines Ereignisses lässt sich auch statistisch als
@@ -107,3 +94,68 @@ Wahrscheinlichkeiten von Ereignissen sind also immer Werte im Bereich von 0
 (unmöglich) und 1 (sicher). Zusätzlich kann man die Wahrscheinlichkeit eines
 nicht-elementaren Ereignisses durch Zerlegung in disjunkte Teilereignisse
 berechnen.
+
+
+\section{Unabhängigkeit und bedingte Wahrscheinlichkeit}
+
+Die bedingte Wahrscheinlichkeit ist immer dann relevant, wenn die Beziehung
+zweier Ereignisse untersucht wird. Der Begriff beschreibt die Wahrscheinlichkeit
+eines Ereignisses, wenn man davon ausgeht, dass ein anderes Ereignis (die
+\emph{Bedingung}) bereits eingetreten ist. Ändern sich die Wahrscheinlichkeiten
+durch die Bedingung nicht, sind die Ereignisse unabhängig.
+
+\begin{definition}{Bedingte Wahrscheinlichkeit}{bedw}
+Seien $A, B$ \link{def:ereignis}{Ereignisse} und $P(B)>0$. Dann heißt
+\[P(A|B) := \frac{P(A\cap B)}{P(B)}\]
+\defw{bedingte Wahrscheinlichkeit} von $A$ unter der Bedingung $B$.
+Eine Schreibweise der bedingten Wahrscheinlichkeit $P(A|B)$ ist $P_B(A)$.
+\end{definition}
+
+\begin{theorem}{Satz von Bayes}{bayes}
+Seien $A,B$ \link{def:ereignis}{Ereignisse}. Es gilt:
+\[P(A|B) = P(B|A) \cdot\frac{P(A)}{P(B)}\]
+Der Satz folgt aus der Definition der bedingten Wahrscheinlichkeit und $P(A\cap
+B) = P(B\cap A)$.
+\end{theorem}
+Durch den Satz von Bayes können also zum Beispiel bedingte Wahrscheinlichkeiten
+"`umgedreht"' werden.
+
+\begin{definition}{Unabhängigkeit von Ereignissen}{unabh}
+Zwei \link{def:ereignis}{Ereignisse} $A, B$ heißen \defw{unabhängig}, wenn gilt:
+\[P(A|B) = P(A) \iff P(B|A) = P(B)\]
+Ereignisse $A_1,...,A_n$ heißen unabhängig, wenn gilt:
+\[P(A_1\cap ...\cap A_n) = P(A_1)\cdot ...\cdot P(A_n)\]
+\end{definition}
+
+Sind Ereignisse unabhängig, kann man die Wahrscheinlichkeit des gemeinsamen
+Auftretens durch Multiplikation ermitteln:
+\[P(A\cap B) = P(A|B)\cdot P(B) = P(A)\cdot P(B)\]
+Sind die Ereignisse nicht unabhängig, ist $P(A|B) \ne P(A)$, sodass die
+Einzelwahrscheinlichkeiten nicht einfach multipliziert werden dürfen.
+
+\begin{theorem}{Multiplikationssatz}{multiplikation}
+Seien $A_1, ...,A_n$ zufällige Ereignisse mit $P(A_i) > 0)$. Dann gilt:
+\[P(A_1\cap A_2\cap ...\cap A_n = P(A_1)\cdot P(A_2|A_1) \cdot ...\cdot
+P(A_n|A_1\cap ...\cap A_{n-1})\]
+\end{theorem}
+
+
+\subsection{Zufallsvariablen}
+
+\begin{definition}{Zufallsvariable}{zvar}
+Eine Funktion $X: \Omega \to \R$ wird als \defw{Zufallsvariable}
+bezeichnet. Die Zufallsvariable ordnet jedem Ereignis einer
+\link{def:ealg}{Ereignisalgebra} eine reelle Zahl zu.
+
+Der Wertebereich der Zufallszahl wird als \altname{Zustandsraum} $S = X(\Omega)$
+bezeichnet.
+
+Ist $S$ endlich oder abzählbar unendlich, wird die Zufallsvariable als
+\defw{diskret}, ist $S$ überabzählbar unendlich als \defw{stetig} bezeichnet.
+\end{definition}
+
+\begin{definition}{Unabhängigkeit von Zufallsvariablen}{zvar-unabh}
+Seien $X: \Omega \to \R$, $Y: \Omega \to \R$ \link{zvar}{Zufallsvariablen}. $X,
+Y$ heißen \defw{unabhängig}, wenn für $a,b,c,d \in \R$, $a\le b, c\le d$ gilt:
+\[P(a < X\le b,c<Y\le d) = P(a<X\le b)\cdot P(c<Y\le d)\]
+\end{definition}
