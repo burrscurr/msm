@@ -7,25 +7,64 @@
 \usepackage{hyphenat}
 \hyphenation{Mathe-matik}
 
-\usepackage{hyperref}
-
+% math packages
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
 
-\newtheoremstyle{spaced}
-  {1.25}% space above
-  {1.25}% space below
-  {}% body font
-  {}% indent
-  {\bfseries}%
-  {}%
-  {\newline}{}%
-\theoremstyle{spaced}
-\newtheorem{definition}{Definition}
+% links in the pdf
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% boxes, e.g. for theorems
+\usepackage[most]{tcolorbox}
+
+
+% styling shamelessly copied from https://tex.stackexchange.com/questions/369430/
+\tcbset{definitionstyle/.style={
+    enhanced,
+    sharp corners,
+    attach boxed title to top left={
+      xshift=-1mm,
+      yshift=-4mm,
+      yshifttext=-3mm
+    },
+    top=1.5ex,
+    colback=white,
+    colframe=green!75!black,
+    fonttitle=\bfseries,
+    boxed title style={
+      sharp corners,
+    size=small,
+    colback=green!75!black,
+    colframe=green!75!black
+  }
+}}
+\newtcbtheorem{definition}{Definition}{definitionstyle}{def}
+
+\tcbset{theoremstyle/.style={
+    enhanced,
+    sharp corners,
+    attach boxed title to top left={
+      xshift=-1mm,
+      yshift=-4mm,
+      yshifttext=-3mm
+    },
+    top=1.5ex,
+    colback=white,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    boxed title style={
+      sharp corners,
+    size=small,
+    colback=blue!75!black,
+    colframe=blue!75!black,
+  }
+}}
+
+\newtcbtheorem{theorem}{Satz}{theoremstyle}{satz}
 
 % examples
-
 \newtheoremstyle{examplestyle}
   {0.5}% space above
   {0}% space below

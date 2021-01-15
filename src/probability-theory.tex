@@ -7,7 +7,7 @@ beschäftigt (\href{https://de.wikipedia.org/wiki/Wahrscheinlichkeitstheorie}
 
 \section{Zufallsversuch, Ereignis, Zufallsvariable}
 
-\begin{definition}[Zufallsversuch]\label{def:zufallsversuch}
+\begin{definition}{Zufallsversuch}{zufallsversuch}
 Ein Versuch oder Vorgang, der unter genau festgelegten Versuchsbedingungen
 durchgeführt einen zufälligen Ausgang besitzt, wird als \defw{Zufallsversuch}
 (auch: \altname{Zufallsexperiment} oder \altname{Wahrscheinlichkeitsexperiment})
@@ -15,14 +15,14 @@ bezeichnet.
 \end{definition}
 
 
-\begin{definition}[Grundraum]\label{def:grundraum}
+\begin{definition}{Grundraum}{grundraum}
 Alle möglichen Ausgänge eines \link{def:zufallsversuch}{Zufallsversuchs}
 bilden den \defw{Grundraum} $\Omega$ (auch: \altname{Ergebnismenge}). Die
 Elemente des Grundraums werden als \altname{Elementarereignisse} bezeichnet.
 \end{definition}
 
 
-\begin{definition}[Ereignis]\label{def:ereignis}
+\begin{definition}{Ereignis}{ereignis}
 Eine Teilmenge $A$ von $\Omega$ wird als Ereignis bezeichnet. Dabei bezeichnet
 $A = \Omega$ das sichere Ereignis, dass immer eintritt und $A = \emptyset$ das
 unmögliche Ereignis.
@@ -36,7 +36,7 @@ eine Augenzahl $\ge 5$ gewürfelt wird.
 \end{example}
 
 
-\begin{definition}[Ereignisalgebra]\label{def:ealg}
+\begin{definition}{Ereignisalgebra}{ealg}
 Eine Menge von Ereignissen bezogen auf einen \link{def:grundraum}{Grundraum}
 $\Omega$ bildet eine \defw{Ereignisalgebra} oder \altname{Ereignissystem}, wenn gilt:
 
@@ -69,7 +69,7 @@ neues Ereignis ergibt.
 \end{example}
 
 
-\begin{definition}[Zufallsvariable]\label{def:zvar}
+\begin{definition}{Zufallsvariable}{zvar}
 Eine Funktion $X: \Omega \to \R$ wird als \defw{Zufallsvariable}
 bezeichnet. Die Zufallsvariable ordnet jedem Ereignis einer
 \link{def:ealg}{Ereignisalgebra} eine reelle Zahl zu.
@@ -81,6 +81,7 @@ Ist $S$ endlich oder abzählbar unendlich, wird die Zufallsvariable als
 \defw{diskret}, ist $S$ überabzählbar unendlich als \defw{stetig} bezeichnet.
 \end{definition}
 
+
 \section{Wahrscheinlichkeit}
 
 Die \emph{Wahrscheinlichkeit} eines Ereignisses lässt sich auch statistisch als
@@ -90,7 +91,7 @@ Weise zuverlässig bestimmen zu können, müssen sehr viele Zufallsversuche
 durchgeführt werden. Etwas "`mathematischer"' ist folgende (axiomatische)
 Definition:
 
-\begin{definition}[Wahrscheinlichkeit]
+\begin{definition}{Wahrscheinlichkeit}{whkt}
 Sei $\mathcal{A}$ eine \link{def:ealg}{Ereignisalgebra} auf einem
 \link{def:grundraum}{Grundraum} $\Omega$. Eine Abbildung
 \[ P: \mathcal{A} \to 0,1 \]
