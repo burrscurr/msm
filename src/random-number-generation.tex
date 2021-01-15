@@ -1,0 +1,58 @@
+\chapter{Generierung von Zufallszahlen}
+
+Dieses Kapitel behandelt Grundlagen und Methoden zur Generierung von beliebig
+verteilten Zufallszahlen durch einen Zufallszahlengenerator mit gleichverteilten
+Zufallszahlen.
+
+\section{Zufallsvektoren}
+
+\begin{definition}{Zufallsvektor}{zvektor}
+Seien $X_1, ..., X_n$ \link{def:zvar}{Zufallsvariablen}. Die Zusammenfassung
+\[\underline{X} = (X_1, ..., X_n)^T\]
+zu einem Vektor heißt \defw{Zufallsvektor}. Sind alle Komponenten des Vektors
+diskret beziehungsweise stetig, heißt der Zufallsvektor diskret beziehungsweise
+stetig.
+\end{definition}
+
+Die Werte eines (zweidimensionalen) diskreten Zufallsvektors lassen sich in einer Matrix
+zusammenfassen:
+
+\begin{definition}{Gemeinsame Verteilung eines Zufallsvektors}{vert-zvektor}
+Sei $\underline{X} = (X, Y)^T$ ein diskreter Zufallsvektor, wobei die
+Zufallsvariable $X$ die Werte $x_0, x_1, ..., x_n$ und $Y$ die Werte $y_0, y_1, ...,
+y_m$ annimmt. Dann bezeichnet die Matrix
+\[(p_{ij})_{i=0,...,n;j=0,...,m} \qquad mit\ p_{ij} = P(X=x_i, Y=y_j)\]
+die \defw{gemeinsame Verteilung} von $\underline{X}$.
+\end{definition}
+
+Die Summierung von Zeilen bzw. Spalten der Matrix werden als Randverteilung
+bezeichnet:
+\[p_{i.}:=P(X=x_i) = \sum_j p_{ij}\]
+\[p_{.j}:=P(Y=y_j) = \sum_i p_{ij}\]
+Für stetige Zufallsvariablen $X$ und $Y$ mit gemeinsamer \link{def:dichte}{Dichte}
+$\rho_{(X, Y)}\ge 0$ können folgende \defw{Randdichten} abgeleitet werden:
+\[\rho_X(x) = \int\rho_{(X,Y)}(x,y)\mathrm{d} y\quad x\in\R\]
+\[\rho_Y(y) = \int\rho_{(X,Y)}(x,y)\mathrm{d} x\quad y\in\R\]
+
+Analog zur \link{def:bedw}{bedingten Wahrscheinlichkeit} von Ereignissen lässt sich
+auch für Zufallsvektoren eine bedingte Wahrscheinlichkeit definieren:
+
+\begin{definition}{Bedingte Wahrscheinlichkeit/Bedingte Dichte}{bwahr-zvektor}
+Sei $\underline{X} = (X, Y)^T$ ein diskreter Zufallsvektor mit
+\link{def:vert-zvektor}{gemeinsamer Verteilung} $(p_{ij})_{i,j=0,1,...}$. Dann ist
+mit
+\[P(Y=y_j|X=x_i) := \frac{P(X=x_i, Y=y_j)}{P(X=x_i)} = \frac{p_{ij}}{p_{i.}}\]
+die \defw{bedingte Wahrscheinlichkeit} von $Y=y_j$ unter Bedingung $X=x_i$ gegeben.
+
+Ist $\underline{X}$ ein stetiger Zufallsvektor mit gemeinsamer Dichte
+$\rho_{(X,Y)}$, so bezeichnen die Funktionen
+\[\rho_{X|Y=y}(x) = \frac{\rho_{(X,Y)}(x,y)}{\rho_Y(y)}\]
+\[\rho_{Y|X=x}(y) = \frac{\rho_{(X,Y)}(x,y)}{\rho_X(x)}\]
+die \defw{bedingte Dichte} von $X$ unter $Y=y$ bzw. $Y$ unter $X=x$.
+\end{definition}
+
+Ebenso analog zur \link{def:bedw}{bedingten Wahrscheinlichkeit} von Ereignissen kann
+der \link{satz:bayes}{Satz von Bayes} für diskrete bzw. stetige Zufallsvektoren
+formuliert werden:
+\[p_{ij} = P(Y=y_j|X=x_i)\cdot p_{i.}\]
+\[\rho_{(X,Y)} = \rho_{Y|X=x}(y)\cdot\rho_X(x)\]
