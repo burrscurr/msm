@@ -6,12 +6,35 @@ chains and Monte-Carlo simulation at [HTW Dresden](https://htw-dresden.de))
 <hr>
 
 Skript für das Fach Mathematisch-Stochastische Modelle: Markovketten und
-Monte-Carlo-Simulationen. Es gibt kein offizielles Skript für das Fach (wtf?).
+Monte-Carlo-Simulationen an der [HTW Dresden](https://htw-dresden.de). Es gibt
+kein offizielles Skript für das Fach (wtf?).
 
-## Format
+## Fortschritt
 
-Das Skript soll vor allem Definitionen zusammenfassen. Für weitere Erklärungen
-und Beispiele wird z.B. auf andere Webseiten verwiesen.
+- [x] Grundlagen der Wahrscheinlichkeitstheorie
+- [x] Wahrscheinlichkeitsverteilungen
+- [x] ├ Diskrete Verteilungen
+- [x] └ Stetige Verteilungen
+- [ ] Erzeugung von Zufallszahlen
+- [x] ├ Inversionsmethode
+- [x] ├ Annahme-Verwerfungs-Methode
+- [x] ├ Importance Sampling
+- [ ] ├ Box-Muller-Polarmethode
+- [ ] └ Erzeugung von Zufallsvektoren
+- [ ] Monte-Carlo (Skriptausschnitt in OPAL verfügbar)
+- [ ] ├ Zentraler Grenzwertsatz
+- [ ] ├ Satz von Moivre-Laplace
+- [ ] └ Anwendungsbeispiele
+- [ ] Markov-Ketten
+- [ ] ├ Definition
+- [ ] ├ Eigenschaften von Zuständen
+- [ ] ├ Rückkehrzeiten
+- [ ] ├ Langzeitverhalten
+- [ ] └ Stetige Zeit
+- [ ] Markov-Chain-Monte-Carlo
+- [ ] ├ Konzept
+- [ ] ├ Anwendungsbeispiele
+- [ ] └ Metropolis-Algorithmus
 
 ## Mitmachen
 
@@ -23,5 +46,5 @@ cd src
 make
 ```
 
-Für Erweiterungen oder Korrekturen am Skript können einfach Issues/Pull
-requests erstellt werden.
+Erweiterungen und Korrekturen des Skripts sind sehr erwünscht und können als
+Issues/Pull requests erstellt werden.
