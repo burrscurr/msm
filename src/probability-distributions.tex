@@ -97,6 +97,27 @@ dass X bestimmte Werte annimmt, zu berechnen ($a,b\in\R$):
   P(X < b) = \int^{\infty}_{b}\rho(x)\,\mathrm{d}x
 \end{align*}
 
+\begin{definition}{Verteilungsfunktion}{vertf}
+Sei $X$ eine \link{def:zvar}{Zufallsvariable}. Die Funktion
+\[F_X:\R\to\R,\ F_X(z) = P(X \le z)\]
+heißt \defw{Verteilungsfunktion} von $X$.
+\end{definition}
+
+Die Verteilungsfunktion ist monoton wachsend und rechtsstetig. Weiterhin gilt:
+\begin{align*}
+0\le &F_X(z)\le 1
+F(-\infty) &= 0
+F(\infty) &= 1
+\end{align*}
+
+Die Verteilungsfunktion $F_X$ kann wie folgt verwendet werden, um
+Wahrscheinlichkeiten bezüglich der Zufallsvariable $X$ zu berechnen:
+\begin{align*}
+P(X>a) &= 1 - F_X(a) \\
+P(X\le b) &= F_X(b) \\
+P(a < X \le b) &= F_X(b) - F_X(a)
+\end{align*}
+
 Im Folgenden Abschnitt sei $X$ eine stetige \link{def:zvar}{Zufallsvariable}
 mit Zustandsraum $S$, $A \in S$ und $P$ eine
 \link{def:verteilung}{Wahrscheinlichkeitsverteilung} dieser Zufallsvariable.
@@ -130,20 +151,12 @@ Eine standardnormalverteilte Zufallsvariable nimmt im Mittel den Wert $0$ mit
 einer Varianz von $1$ an. Es gilt:
 \[\rho(x) = \frac{1}{\sqrt{2\pi}}exp(-\frac{x^2}{2})\]
 
-Die Wahrscheinlichkeit
-\[P(X \le z) = \int_{-\infty}^{z}\rho(x)\,\mathrm{d}x\]
-
-wird auch mit $\Phi(z)$ bezeichnet.
+Die \link{def:vertf}{Verteilungsfunktion} der Standardnormalverteilung wird mit $\Phi(z)$ bezeichnet.
 
 Ist $X$ normalverteilt mit $\mu$ und $\sigma^2$, dann ist die Zufallsvariable
 \[Z=\frac{X-\mu}{\sigma}\]
 
-standardnormalverteilt. Es gilt:
-\begin{align*}
-P(X>a) &= 1 - \Phi\Big(\frac{a-\mu}{\sigma}\Big) \\
-P(X\le b) &= \Phi\Big(\frac{b-\mu}{\sigma}\Big) \\
-P(a < X < b) &= \Phi\Big(\frac{b-\mu}{\sigma}\Big) - \Phi\Big(\frac{a-\mu}{\sigma}\Big)
-\end{align*}
+standardnormalverteilt.
 
 \section{Erwartungswert und Varianz}
 
