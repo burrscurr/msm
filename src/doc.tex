@@ -7,6 +7,9 @@
 \usepackage{hyphenat}
 \hyphenation{Mathe-matik}
 
+% page layout
+\usepackage[a4paper,width=135mm,top=25mm,bottom=25mm,bindingoffset=0mm]{geometry}
+
 % images
 \usepackage{graphicx}
 \graphicspath{{./img/}}
@@ -46,13 +49,13 @@ linesnumbered
     },
     top=1.5ex,
     colback=white,
-    colframe=green!75!black,
+    colframe=green!40!black,
     fonttitle=\bfseries,
     boxed title style={
       sharp corners,
     size=small,
-    colback=green!75!black,
-    colframe=green!75!black
+    colback=green!40!black,
+    colframe=green!40!black
   }
 }}
 \newtcbtheorem{definition}{Definition}{definitionstyle}{def}
@@ -67,13 +70,13 @@ linesnumbered
     },
     top=1.5ex,
     colback=white,
-    colframe=blue!75!black,
+    colframe=blue!95!black,
     fonttitle=\bfseries,
     boxed title style={
       sharp corners,
     size=small,
-    colback=blue!75!black,
-    colframe=blue!75!black,
+    colback=blue!95!black,
+    colframe=blue!95!black,
   }
 }}
 
@@ -109,8 +112,13 @@ linesnumbered
 \newcommand{\notation}{\textbf}
 
 
-\title{Mathematisch-Stochastische Modelle: Markov-Ketten und Monte-Carlo-Simulationen}
-\author{Max Ziermann}
+\title{%
+\huge\textbf{Mathematisch-Stochastische Modelle: Markov-Ketten und Monte-Carlo-Simulationen} \\
+[2em]\large Skript nach einer Vorlesung an der HTW Dresden\thanks{Es gibt kein
+offizielles Skript (WTF?)}}
+
+\author{Max Ziermann\thanks{Quellen sind auf \href{https://github.com/burrscurr/msm}
+{Github} verfügbar. Mitarbeit istausdrücklich erwünscht!}}
 
 
 \begin{document}
