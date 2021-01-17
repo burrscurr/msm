@@ -1,0 +1,97 @@
+\chapter{Markov-Ketten}
+
+Markov-Ketten dienen zur Beschreibung von Prozessen, deren zukünftiger Zustand
+nur durch den letzten Zustand bestimmt wird. Markov-Prozesse werden darum auch
+als "`gedächtnislos"' bezeichnet.
+
+\begin{definition}{Stochastischer Prozess}{stochp}
+Sei $T=\N_0$ und $S \subset\R$. Für jedes $t\in T$ sei $X_t$ eine
+\link{def:zvar}{Zufallsvariable} mit Zustandsraum $S$. Dann heißt die Familie
+\[
+\big(X_t\big)_{t\in T}
+\]
+\defw{stochastischer Prozess} mit Zustandsraum $S$ und diskreter Zeit. Ist
+$T = [0, \infty)$ handelt es sich um einen \defw{stetigen stochastischen Prozess}.
+\end{definition}
+
+\begin{definition}{Markov-Kette}{mk}
+Ein stochastischer Prozess $\big(X_t\big)_{t\in \N_0}$ mit Zustandsraum $S$
+heißt \defw{Markov-Kette} falls für alle $n\in\N_0$ und $k,l,x_0,x_1,...,x_n \in S$
+gilt:
+\[
+P\big(X_{n+1} = l | X_{n}=k, X_{n-1}=x_{n-1},...,X_0=x_0\big) =
+P\big(X_{n+1}=l|X_n=k\big)
+\]
+Diese Wahrscheinlichkeit heißt Übergangswahrscheinlichkeit und wird mit $p(k,l)$
+bezeichnet.
+\end{definition}
+
+Die Definition der Markov-Kette beschreibt genau die Eigenschaft der
+"`Gedächtnislosigkeit"': Die Wahrscheinlichkeit, in den nächsten Zustand zu
+wechseln hängt lediglich davon ab, wo man sich gerade befindet (und nicht von
+den Schritten davor).
+
+\begin{definition}{Übergangsmatrix einer Markovkette}{mk-ümatr}
+Sei $(X)_{n\in N_0}$ eine \link{def:mk}{Markovkette} mit Zustandsraum $S$. Die
+Übergangswahrscheinlichkeiten $p(i,j)$ mit $i,j\in S$ lassen sich als Matrix
+anordnen:
+\[
+\Pi = \big(p(i,j)\big)_{i,j\in S}
+\]
+Diese Matrix wird als \defw{Übergangsmatrix} der Markov-Kette bezeichnet.
+\end{definition}
+
+Jede Zeile der Übergangsmatrix enthält die Wahrscheinlichkeiten, in den Zustand
+der jeweiligen Spalte überzugehen. Die Matrix ist eine sogenannte
+\defw{stochastische Matrix}, das heißt alle Einträge besitzen Werte zwischen $0$
+und $1$ und die Summe jeder Zeile ist $1$.
+
+\begin{definition}{Verteilung einer Markovkette}{mk-vert}
+Sei $(X)_{n\in N_0}$ eine \link{def:mk}{Markovkette} mit Zustandsraum $S$. Dann
+heißt der Zeilenvektor mit $m\in \N_0$
+\[
+\pi_m = \big(P(X_m=s_1), ...,P(X_m=s_n)\big),\ s_1, ..., s_n \in S
+\]
+Verteilung der Markovkette zur Zeit $m$.
+\end{definition}
+
+\begin{theorem}{Berechnung einer Markovkette}{mk-ber}
+Sei $S$ eine diskrete Menge, $\Pi = \big(p(k,l)\big)_{k,l\in S}$ eine
+stochastische Matrix auf $S$ und $\pi_0 = \big(p_0(k)\big)$ die
+\link{def:mk-vert}{Verteilung} der Zustände zu Beginn der Betrachtung. Dann ist
+die Verteilung $\pi_n$ nach $n$ Schritten berechenbar durch
+\[
+\pi_n = \pi_0\cdot\Pi^n
+\]
+Die Matrix $\Pi^n$ gibt die Wahrscheinlichkeit an, in $n$ Schritten von
+Zustand $i$ in Zustand $j$ überzugehen.
+\end{theorem}
+
+Damit hängt die Wahrscheinlichkeit, sich nach einer festen Anzahl an Schritten
+in einem bestimmten Zustand zu befinden, neben den Übergangswahrscheinlichkeiten
+$\Pi$ nur von der Anfangsverteilung ab.
+
+\begin{theorem}{Chapman-Kolmogorow-Gleichung}{chapman}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$. Dann kann die
+Wahrscheinlichkeit, in $n+m$ Schritten von Zustand $i$ in Zustand $k$ zu
+wechseln gleich der Summe der Pfade über alle möglichen Zwischenstationen:
+\[
+P(X_{n+m}=k|X_0=i) = \sum_{j\in S}P(X_{n+m}=k|X_n=j)\cdot P(X_n=j|X_0=i)
+\]
+\end{theorem}
+
+Das lässt sich durch die Definition der Matrixmultiplikation zeigen
+(\href{https://de.wikipedia.org/wiki/Chapman-Kolmogorow-Gleichung}{Wikipedia}).
+
+\section{Eigenschaften}
+
+\begin{definition}{Pfad}{mk-pfad}
+Ein konkreter Folge von Zuständen einer Markovkette $(X)_{n\in N_0}$ wird
+als \defw{Pfad} bezeichnet.
+\end{definition}
+
+\subsection{Eigenschaften von Zuständen}
+
+\subsection{Rückkehreigenschaften}
+
+\section{Langzeitverhalten}

@@ -26,7 +26,7 @@ kein offizielles Skript für das Fach (wtf?).
 - [ ] ├ Satz von Moivre-Laplace
 - [ ] └ Anwendungsbeispiele
 - [ ] Markov-Ketten
-- [ ] ├ Definition
+- [x] ├ Definition
 - [ ] ├ Eigenschaften von Zuständen
 - [ ] ├ Rückkehrzeiten
 - [ ] ├ Langzeitverhalten
