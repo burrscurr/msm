@@ -27,7 +27,7 @@ kein offizielles Skript für das Fach (wtf?).
 - [ ] └ Anwendungsbeispiele
 - [ ] Markov-Ketten
 - [x] ├ Definition
-- [ ] ├ Eigenschaften von Zuständen
+- [x] ├ Eigenschaften von Zuständen
 - [ ] ├ Rückkehrzeiten
 - [ ] ├ Langzeitverhalten
 - [ ] └ Stetige Zeit

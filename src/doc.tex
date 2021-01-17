@@ -95,11 +95,25 @@ linesnumbered
 \theoremstyle{examplestyle}
 \newtheorem{example}{Beispiel}
 
+% lemmas
+\newtheoremstyle{lemmastyle}
+  {0.5}% space above
+  {0}% space below
+  {\itshape}% body font
+  {}% indent
+  {\textbf}%
+  {}%
+  { }% no newline after 'Beispiel'
+  {\thmname{#1}.}% don't print a lemma number
+\theoremstyle{lemmastyle}
+\newtheorem{lemma}{Lemma}
+
 
 % math helpers
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\e}{\mathrm{e}}
+\newcommand{\lr}{\leftrightarrow}
 
 \newcommand{\link}[2]{\hyperref[#1]{#2}}
 

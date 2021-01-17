@@ -92,6 +92,113 @@ als \defw{Pfad} bezeichnet.
 
 \subsection{Eigenschaften von Zuständen}
 
+Die Zustände von Markovketten können zum Beispiel nach ihrer Erreichbarkeit
+untereinander unterschieden werden.
+
+\begin{definition}{Interaktionsgraph}{mk-igraph}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$. Der gerichtete Graph
+$G=(V,E)$ mit Kanten $V=S$ und $E = \{(x,y) \in S\times S\ |\ p(x,y) \ne 0\}$ wird
+als \defw{Interaktionsgraph} bezeichnet.
+\end{definition}
+
+Der Interaktionsgraph beschreibt also die direkten
+Verbindungen der Zustände im Zustandsraum.
+
+\begin{definition}{Erreichbarkeit}{mk-erreichbark}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$. Ein Zustand $y\in S$
+heißt erreichbar von $x\in S$, falls es ein $n>0$ gibt, sodass gilt:
+\[
+P(X_n=y|X_0=x) > 0
+\]
+Erreichbarkeit kann auch durch die \link{def:ümatr}{Übergangsmatrix} $\Pi$
+definiert werden:
+\[
+\exists n\in\N: \Pi^n(x,y) \ne 0
+\]
+\end{definition}
+
+Ist $y$ von $x$ erreichbar, existiert im Interaktionsgraph ein Pfad von $x$ zu
+$y$. Dieser Pfad muss nicht direkt sein, sondern kann auch über andere Zustände
+führen. Wir verwenden für diese Erreichbarkeit die Schreibweise $x\to y$.
+
+\begin{definition}{Verbundene Zustände}{mk-verb}
+Sei $S$ der Zustandsraum einer Markovkette. Die Zustände $x,y\in S$ heißen
+\defw{verbunden}, wenn gilt:
+\[
+x\to y \land y \to x
+\]
+Verbundene Zustände werden durch das Zeichen $\lr$ gekennzeichnet
+($x \lr y$).
+\end{definition}
+
+Die Verbundenheit von Zuständen ist eine Relation, die \emph{reflexiv} (jeder
+Zustand ist mit sich selbst verbunden), \emph{symmetrisch} (verbundene
+Zustände sind auch in der "`Gegenrichtung"' verbunden) und \emph{transitiv}
+(sind $a$ mit $b$ und $b$ mit $c$ verbunden, ist auch $a$ mit $c$
+verbunden). Damit ist die Relation $\lr$ eine
+\href{https://de.wikibooks.org/wiki/Mathe\_f\%C3\%BCr\_Nicht-Freaks:\_\%C3\%d84quivalenzrelation}
+{Äquivalenzrelation}.
+Das bedeutet insbesondere, dass die Zustandsmenge $S$ durch die Verbundenheitsrelation in
+Äquivalenzklassen zerlegt wird, in denen jeder Zustand mit jedem anderen Zustand
+verbunden ist.
+
+Zwischen Äquivalenzklassen kann sich nicht beliebig bewegt werden; insbesondere
+kann eine einmal verlassene Klasse nicht wieder erreicht werden. (Gäbe es einen
+"`Weg zurück"', wären auch jedes Paar von Zuständen aus beiden Klassen
+miteinander verbunden. Das ist ein ein Widerspruch, denn dann müssten diese
+Zustände ja in \emph{einer} gemeinsamen Äquivalenzklasse liegen.)
+
+Die \link{def:mk-erreichbark}{Erreichbarkeit von Zuständen} können wir auf die
+Äquivalenzklassen übertragen:
+\begin{definition}{Ordnung von Zustandsklassen}{mk-ord}
+Sei $S$ der Zustandsraum einer Markovkette, der durch die Verbundenheitsrelation
+$\lr$ in Klassen $S_{/\lr}=\{G_1, G_2,...,G_n\}$ zerlegt wird. Auf diesen
+Klassen definieren wir folgende Relation:
+\[
+\preceq\ =\{(G_i, G_j)\ |\ \exists s_i\in G_i, s_j\in G_j: s_i\to s_j\}\ \subseteq\ S_{/\lr}\times S_{/\lr}
+\]
+Die Relation bildet eine \href{https://de.wikibooks.org/wiki/Mathe\_f\%C3\%BCr\_Nicht-Freaks:\_Ordnungsrelation#Halbordnung}
+{partielle Ordnung}, ist also reflexiv, anti-symmetrisch und transitiv. Für
+$G_i\preceq G_j$ schreiben wir auch $G_i\to G_j$.
+\end{definition}
+
+Die so definierte Ordnung ist jedoch im Allgemeinen nicht \emph{total}, da nicht
+für jedes Paar von Zustandsklassen definiert sein muss, ob $G_i\preceq G_j$ oder
+$G_j \preceq G_i$ gilt. Das ist zum Beispiel der Fall, wenn die Klassen nicht
+miteinander verbunden sind, also im Interaktionsgraphen unverbundene Subgraphen
+bilden.
+
+\begin{definition}{Abgeschlossene/Transiente Klassen}{mk-abg}
+Sei $G$ eine Zustandsklasse einer Markovkette. $G$ heißt \defw{abgeschlossen},
+wenn es keine Klasse gibt, die von $G$ erreicht werden kann:
+\[
+\nexists H\ne G: G\preceq H
+\]
+Ist $G$ nicht abgeschlossen, wird die Klasse als \defw{transient} bezeichnet.
+\end{definition}
+
+Abgeschlossene Klassen werden zusätzlich nach der Anzahl ihrer Zustände
+unterschieden:
+
+\begin{definition}{Rekurrente/absorbierende Klassen}{mk-rekkurr-abs}
+Sei $G$ eine \link{def:mk-abg}{abgeschlossene Klasse}. Gilt $|G|=1$, heißt $G$
+\defw{absorbierend}, sonst ($|G| > 1$) \defw{rekurrent}.
+\end{definition}
+
+Sind alle Zustände einer Markovkette miteinander verbunden, gibt es nur eine
+Äquivalenzklasse:
+\begin{definition}{Irreduzibilität}{mk-irred}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$, der durch die
+Verbundenheitsrelation $\lr$ in die Menge $S_{/\lr}$ zerlegt wird. Gilt
+\[
+S_{/\lr}\ = \{S\}
+\]
+heißt die Markovkette \defw{irreduzibel}.
+\end{definition}
+\begin{lemma}
+Die Klasse $S$ einer irreduziblen Markovkette ist abgeschlossen.
+\end{lemma}
+ 
 \subsection{Rückkehreigenschaften}
 
 \section{Langzeitverhalten}
