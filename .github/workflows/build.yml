@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install pdflatex
-        run: sudo apt-get install texlive-latex-extra texlive-lang-german
-      - name: Build the pdf from latex source
-        run: make --directory=src
+      - uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: |
+            apk add make
+            make --directory=src
