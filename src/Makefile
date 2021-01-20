@@ -1,5 +1,7 @@
 build:
 	pdflatex doc
+	biber doc
+	pdflatex doc
 	pdflatex doc
 
 clean:

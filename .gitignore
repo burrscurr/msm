@@ -2,4 +2,11 @@
 *.toc
 *.log
 *.out
+
+# bibliography files
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+
 *.pdf

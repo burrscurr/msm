@@ -37,6 +37,9 @@ linesnumbered
 % boxes, e.g. for theorems
 \usepackage[most]{tcolorbox}
 
+% references
+\usepackage{biblatex}
+\addbibresource{ref/markov.bib}
 
 % styling shamelessly copied from https://tex.stackexchange.com/questions/369430/
 \tcbset{definitionstyle/.style={
@@ -117,6 +120,10 @@ linesnumbered
 
 \newcommand{\link}[2]{\hyperref[#1]{#2}}
 
+% command for a informational reference where more details and background
+% information can be found (e.g. proofs, explanations etc.)
+\newcommand{\more}[1]{\,(vgl. \cite{#1})}
+
 % style highlighting a word that was just defined
 \newcommand{\defw}{\textbf}
 % style for alternative names, for instance in definitions
@@ -143,4 +150,6 @@ offizielles Skript (WTF?)}}
   \input{probability-distributions.tex}
   \input{random-number-generation.tex}
   \input{markov.tex}
+
+  \printbibliography
 \end{document}
