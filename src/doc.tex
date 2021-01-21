@@ -7,50 +7,46 @@
 \usepackage{hyphenat}
 \hyphenation{Mathe-matik}
 
-% multi-line comments
-\usepackage{verbatim}
-
-% page layout
+% Seitenlayout
 \usepackage[a4paper,width=135mm,top=25mm,bottom=25mm,bindingoffset=0mm]{geometry}
 
-% images
+% Bilder/Darstellungen
 \usepackage{graphicx}
 \graphicspath{{./img/}}
-
-% embedded images
 \usepackage{float}
 \usepackage{wrapfig}
 
-% graphs and complex drawings
+% Graphen
 \usepackage{tikz}
-\tikzset{% This is the style settings for nodes
+\tikzset{
     v/.style={circle,minimum size=2ex, draw=black},
     e/.style={-stealth, thick}}
 
-% math packages
+% Mathematikfoo
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
 
-% Algorithms
+% Algorithmen
 \usepackage[
 german,
 ruled,
 linesnumbered
 ]{algorithm2e}
 
-% links in the pdf
+% Verlinkungen
 \usepackage{hyperref}
 \usepackage{cleveref}
 
-% boxes, e.g. for theorems
-\usepackage[most,many]{tcolorbox}
-
-% references
+% Literatur
 \usepackage{biblatex}
 \addbibresource{ref/markov.bib}
 
-% styling shamelessly copied from https://tex.stackexchange.com/questions/369430/
+% Einrahmungen
+\usepackage[most,many]{tcolorbox}
+
+% Layout von https://tex.stackexchange.com/questions/369430/
+% Definitionen
 \tcbset{definitionstyle/.style={
     enhanced,
     sharp corners,
@@ -72,6 +68,7 @@ linesnumbered
 }}
 \newtcbtheorem{definition}{Definition}{definitionstyle}{def}
 
+% Sätze
 \tcbset{theoremstyle/.style={
     enhanced,
     sharp corners,
@@ -94,7 +91,7 @@ linesnumbered
 
 \newtcbtheorem{theorem}{Satz}{theoremstyle}{satz}
 
-% examples
+% Beispiele
 \tcbset{examplestyle/.style={
     enhanced,
     sharp corners,
@@ -116,7 +113,7 @@ linesnumbered
 }}
 \newtcbtheorem{example}{Beispiel}{examplestyle}{bsp}
 
-% lemmas
+% Lemmata
 \newtheoremstyle{lemmastyle}
   {0.5}% space above
   {1}% space below
@@ -130,7 +127,7 @@ linesnumbered
 \newtheorem{lemma}{Lemma}
 
 
-% math helpers
+% Abkürzungen für Mathezeugs
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\e}{\mathrm{e}}
@@ -141,8 +138,7 @@ linesnumbered
 
 % Interne Referenzen z.B. für definierte Begriffe
 \newcommand{\link}[2]{\hyperref[#1]{#2}}
-% command for a informational reference where more details and background
-% information can be found (e.g. proofs, explanations etc.)
+% Verweis auf weitere Informationen (Beweise, Erklärungen etc.)
 \newcommand{\more}[1]{\,(vgl.\,\cite{#1})}
 % Definierter Begriff in einer Definition
 \newcommand{\defw}{\textbf}
@@ -155,7 +151,7 @@ linesnumbered
 offizielles Skript (WTF?)}}
 
 \author{Max Ziermann\thanks{Quellen sind auf \href{https://github.com/burrscurr/msm}
-{Github} verfügbar. Mitarbeit istausdrücklich erwünscht!}}
+{Github} verfügbar. Mitarbeit ist ausdrücklich erwünscht!}}
 
 
 \begin{document}
@@ -163,9 +159,9 @@ offizielles Skript (WTF?)}}
 
   \tableofcontents
 
-  \input{probability-theory.tex}
-  \input{probability-distributions.tex}
-  \input{random-number-generation.tex}
+  \input{wahrscheinlichkeitstheorie.tex}
+  \input{verteilungen.tex}
+  \input{zufallszahlengenerierung.tex}
 
   \chapter{Markov-Ketten}
   \input{markov-eigenschaften.tex}
