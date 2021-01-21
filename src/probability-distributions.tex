@@ -163,51 +163,51 @@ standardnormalverteilt.
 \begin{definition}{Erwartungswert}{ewert}
 Sei $X$ eine \link{def:zvar}{Zufallsvariable} mit Zustandsraum $S=\{x_0, x_1,
 ...\}$ und Einzelwahrscheinlichkeiten $p_k=P(X=x_k)$. Dann heißt
-\[E(X) =\langle X\rangle := \sum_k x_kp_k\]
+\[\E(X) =\langle X\rangle := \sum_k x_kp_k\]
 Erwartungswert von $X$. Ist $X$ eine stetige Zufallsvariable mit Dichte
 $\rho_X$, gilt:
-\[E(X) =\langle X\rangle := \int x\cdot\rho_X(x)\mathrm{d}x\]
+\[\E(X) =\langle X\rangle := \int x\cdot\rho_X(x)\mathrm{d}x\]
 \end{definition}
 
 \begin{definition}{Varianz}{varianz}
 Sei $X$ eine \link{def:zvar}{Zufallsvariable} mit Zustandsraum $S=\{x_0, x_1,
 ...\}$ und Einzelwahrscheinlichkeiten $p_k=P(X=x_k)$. Dann heißt
-\[Var(X) := \sum_k (x_k - E(X))^2\]
+\[\Var(X) := \sum_k (x_k - \E(X))^2\]
 Variaanz von $X$.
 \end{definition}
 
 Die Varianz ist ein Maß der Streuung einer Zufallsvariable. Sie lässt sich auch
 berechnen durch:
-\[Var(X) = E((X-E(X))^2)\]
+\[\Var(X) = \E((X-\E(X))^2)\]
 Für Erwartungswert und Varianz von Zufallsvariablen $X$, $Y$ und $a,b\in\R$ gelten
 folgende Rechenregeln:
 \begin{align*}
-E(aX+b) &= aE(X) + b \\
-E(X+Y) &= E(X) + E(Y) \\
-Var(aX+b) &= a^2 Var(X) \\
-Var(X) &= E(X^2) - E(X)^2
+\E(aX+b) &= a\E(X) + b \\
+\E(X+Y) &= \E(X) + \E(Y) \\
+\Var(aX+b) &= a^2 \Var(X) \\
+\Var(X) &= \E(X^2) - \E(X)^2
 \end{align*}
 
-Im Gegensatz zum Erwartungswert gilt für die Varianz $Var(X+Y) \ne Var(X) +
-Var(Y)$.
+Im Gegensatz zum Erwartungswert gilt für die Varianz $\Var(X+Y) \ne \Var(X) +
+\Var(Y)$.
 
 \begin{theorem}{Markov inequality}{markov-inequality}
 Sei $X$ eine stetige \link{def:zvar}{Zufallsvariable}, $f$ eine Funktion mit
-$f(X)\ge 0$ und existierndem und endlichem Erwartungswert $E(f(X))$. Dann gilt:
-\[P(f(X)\ge a)\le \frac{E(f(x))}{a},\quad a\in\R\]
+$f(X)\ge 0$ und existierndem und endlichem Erwartungswert $\E(f(X))$. Dann gilt:
+\[P(f(X)\ge a)\le \frac{\E(f(x))}{a},\quad a\in\R\]
 \end{theorem}
 Ein Spezialfall dieser Ungleichung ist:
 \begin{theorem}{Ungleichung von Tschebyscheff}{tschebyscheff}
-Sei $X$ eine Zufallsvariable mit $E(X) = \mu$ und $Var(X) = \sigma^2$. Dann
+Sei $X$ eine Zufallsvariable mit $\E(X) = \mu$ und $\Var(X) = \sigma^2$. Dann
 gilt:
 \[\forall c>0: P(|X-\mu|\ge c) \le\frac{\sigma^2}{c^2}\]
 \end{theorem}
 
 \begin{definition}{Standardisierte Zufallsvariable}{std}
-Sei $X$ eine Zufallsvariable mit $E(X) = 0$ und $Var(X) = 1$. Dann heißt $Z$
+Sei $X$ eine Zufallsvariable mit $\E(X) = 0$ und $Var(X) = 1$. Dann heißt $Z$
 \defw{standardisiert}.
 \end{definition}
 
-Eine Zufallsvariable $X$ mit $E(X) = \mu$ und $Var(X)=\sigma^2$ kann in eine
+Eine Zufallsvariable $X$ mit $\E(X) = \mu$ und $Var(X)=\sigma^2$ kann in eine
 standardisierte Zufallsvariable $\hat{X}$ überführt werden:
 \[\hat{X} = \frac{X-\mu}{\sigma}\]

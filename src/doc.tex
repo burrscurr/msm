@@ -7,6 +7,9 @@
 \usepackage{hyphenat}
 \hyphenation{Mathe-matik}
 
+% multi-line comments
+\usepackage{verbatim}
+
 % page layout
 \usepackage[a4paper,width=135mm,top=25mm,bottom=25mm,bindingoffset=0mm]{geometry}
 
@@ -17,6 +20,12 @@
 % embedded images
 \usepackage{float}
 \usepackage{wrapfig}
+
+% graphs and complex drawings
+\usepackage{tikz}
+\tikzset{% This is the style settings for nodes
+    v/.style={circle,minimum size=2ex, draw=black},
+    e/.style={-stealth, thick}}
 
 % math packages
 \usepackage{amsmath}
@@ -35,7 +44,7 @@ linesnumbered
 \usepackage{cleveref}
 
 % boxes, e.g. for theorems
-\usepackage[most]{tcolorbox}
+\usepackage[most,many]{tcolorbox}
 
 % references
 \usepackage{biblatex}
@@ -86,27 +95,36 @@ linesnumbered
 \newtcbtheorem{theorem}{Satz}{theoremstyle}{satz}
 
 % examples
-\newtheoremstyle{examplestyle}
-  {0.5}% space above
-  {0}% space below
-  {}% body font
-  {}% indent
-  {\itshape}%
-  {}%
-  { }% no newline after 'Beispiel'
-  {\thmname{#1}.}% don't print a example number
-\theoremstyle{examplestyle}
-\newtheorem{example}{Beispiel}
+\tcbset{examplestyle/.style={
+    enhanced,
+    sharp corners,
+    attach boxed title to top left={
+      xshift=-1mm,
+      yshift=-4mm,
+      yshifttext=-3mm
+    },
+    top=1.5ex,
+    colback=white,
+    colframe=white!55!black,
+    fonttitle=\bfseries,
+    boxed title style={
+      sharp corners,
+    size=small,
+    colback=white!50!black,
+    colframe=white!50!black,
+  }
+}}
+\newtcbtheorem{example}{Beispiel}{examplestyle}{bsp}
 
 % lemmas
 \newtheoremstyle{lemmastyle}
   {0.5}% space above
-  {0}% space below
+  {1}% space below
   {\itshape}% body font
   {}% indent
   {\textbf}%
   {}%
-  { }% no newline after 'Beispiel'
+  { }% no newline after 'Lemma'
   {\thmname{#1}.}% don't print a lemma number
 \theoremstyle{lemmastyle}
 \newtheorem{lemma}{Lemma}
@@ -117,20 +135,23 @@ linesnumbered
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\lr}{\leftrightarrow}
+\DeclareMathOperator{\T}{T}       % Matrixtransposition
+\DeclareMathOperator{\E}{E}       % Erwartungswert
+\DeclareMathOperator{\Var}{Var}   % Varianz
 
+% Interne Referenzen z.B. für definierte Begriffe
 \newcommand{\link}[2]{\hyperref[#1]{#2}}
-
 % command for a informational reference where more details and background
 % information can be found (e.g. proofs, explanations etc.)
-\newcommand{\more}[1]{\,(vgl. \cite{#1})}
-
-% style highlighting a word that was just defined
+\newcommand{\more}[1]{\,(vgl.\,\cite{#1})}
+% Definierter Begriff in einer Definition
 \newcommand{\defw}{\textbf}
 % style for alternative names, for instance in definitions
 \newcommand{\altname}{\emph}
 % special notations
 \newcommand{\notation}{\textbf}
-
+% Ungenaue/Fragliche/Unbewiesene/Unbegründete Aussagen
+\newcommand{\warn}[1]{(\textbf{#1})}
 
 \title{%
 \huge\textbf{Mathematisch-Stochastische Modelle: Markov-Ketten und Monte-Carlo-Simulationen} \\
@@ -149,7 +170,10 @@ offizielles Skript (WTF?)}}
   \input{probability-theory.tex}
   \input{probability-distributions.tex}
   \input{random-number-generation.tex}
-  \input{markov.tex}
+
+  \chapter{Markov-Ketten}
+  \input{markov-eigenschaften.tex}
+  \input{markov-langzeitverhalten.tex}
 
   \printbibliography
 \end{document}

@@ -1,5 +1,3 @@
-\chapter{Markov-Ketten}
-
 Markov-Ketten dienen zur Beschreibung von Prozessen, deren zukünftiger Zustand
 nur durch den letzten Zustand bestimmt wird. Markov-Prozesse werden darum auch
 als "`gedächtnislos"' bezeichnet.
@@ -31,7 +29,7 @@ Die Definition der Markov-Kette beschreibt genau die Eigenschaft der
 wechseln hängt lediglich davon ab, wo man sich gerade befindet (und nicht von
 den Schritten davor).
 
-\begin{definition}{Übergangsmatrix einer Markovkette}{mk-ümatr}
+\begin{definition}{Übergangsmatrix einer Markovkette}{mk-matr}
 Sei $(X)_{n\in N_0}$ eine \link{def:mk}{Markovkette} mit Zustandsraum $S$. Die
 Übergangswahrscheinlichkeiten $p(i,j)$ mit $i,j\in S$ lassen sich als Matrix
 anordnen:
@@ -54,6 +52,9 @@ heißt der Zeilenvektor mit $m\in \N_0$
 \]
 Verteilung der Markovkette zur Zeit $m$.
 \end{definition}
+
+Die Komponente einer Verteilung $\pi$ für einen Zustand $s$ wird mit $\pi(s)$
+bezeichnet.
 
 \begin{theorem}{Berechnung einer Markovkette}{mk-ber}
 Sei $S$ eine diskrete Menge, $\Pi = \big(p(k,l)\big)_{k,l\in S}$ eine
@@ -90,7 +91,7 @@ Ein konkreter Folge von Zuständen einer Markovkette $(X)_{n\in N_0}$ wird
 als \defw{Pfad} bezeichnet.
 \end{definition}
 
-\subsection{Eigenschaften von Zuständen}
+\subsection{Zustandsklassen}
 
 Die Zustände von Markovketten können zum Beispiel nach ihrer Erreichbarkeit
 untereinander unterschieden werden.
@@ -104,13 +105,13 @@ als \defw{Interaktionsgraph} bezeichnet.
 Der Interaktionsgraph beschreibt also die direkten
 Verbindungen der Zustände im Zustandsraum.
 
-\begin{definition}{Erreichbarkeit}{mk-erreichbark}
+\begin{definition}{Erreichbarkeit}{mk-erreichbar}
 Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$. Ein Zustand $y\in S$
 heißt erreichbar von $x\in S$, falls es ein $n>0$ gibt, sodass gilt:
 \[
 P(X_n=y|X_0=x) > 0
 \]
-Erreichbarkeit kann auch durch die \link{def:ümatr}{Übergangsmatrix} $\Pi$
+Erreichbarkeit kann auch durch die \link{def:mk-matr}{Übergangsmatrix} $\Pi$
 definiert werden:
 \[
 \exists n\in\N: \Pi^n(x,y) \ne 0
@@ -146,7 +147,49 @@ kann eine einmal verlassene Klasse nicht wieder erreicht werden. (Gäbe es einen
 miteinander verbunden. Das ist ein ein Widerspruch, denn dann müssten diese
 Zustände ja in \emph{einer} gemeinsamen Äquivalenzklasse liegen.)
 
-Die \link{def:mk-erreichbark}{Erreichbarkeit von Zuständen} können wir auf die
+Um die Zustände einer Markovkette zu klassifizieren, beginnt man bei einem
+beliebigen Zustand und bestimmt dessen transitive Hülle bezüglich $\lr$, also
+alle Zustände die mit dem gewählten Zustand verbunden (nicht nur erreichbar!)
+sind. Damit ist eine Klasse der Markovkette gefunden. Dieses Vorgehen
+wird dann mit nicht klassifizierten Zuständen wiederholt, bis alle Zustände
+klassifiziert sind.
+
+\begin{example}{Bestimmung der Zustandsklassen}{}
+Gesucht sind die Zustandsklassen eine Markovkette mit folgendem Interaktionsgraph:
+
+\begin{centering}
+\begin{tikzpicture}
+  \node[v] (1) at (2,1) {1};
+  \node[v] (2) at (4,2) {2};
+  \node[v] (3) at (6,2) {3};
+  \node[v] (6) at (5,0) {6};
+  \node[v] (4) at (8,1) {4};
+  \node[v] (5) at (10,1) {5};
+
+  \draw[e] (1) to[loop above] ();
+  \draw[e] (6) -- (1);
+  \draw[e] (6) -- (3);
+  \draw[e] (2) to[bend right] (3);
+  \draw[e] (3) to[bend right] (2);
+  \draw[e] (2) to[loop above] ();
+  \draw[e] (2) -- (6);
+  \draw[e] (6) -- (4);
+  \draw[e] (4) to[bend left] (5);
+  \draw[e] (5) to[bend left] (4);
+\end{tikzpicture}
+\end{centering}
+
+Zustand 1 ist mit keinen weiteren Zuständen verbunden.
+Zustand 2 ist mit Zuständen 3 und 6 verbunden, aber z.B. nicht mit Zustand 4
+oder 1, da von dort aus kein Weg zurück führt.
+Zustand 4 ist mit Zustand 6 verbunden.
+Damit sind alle Zustände eingeordnet und die Zerlegung der Zustände ist:
+\[
+S_{/\lr} = \{\{1\}, \{2,3,6\}, \{4, 5\}\}
+\]
+\end{example}
+
+Die \link{def:mk-erreichbar}{Erreichbarkeit von Zuständen} können wir auf die
 Äquivalenzklassen übertragen:
 \begin{definition}{Ordnung von Zustandsklassen}{mk-ord}
 Sei $S$ der Zustandsraum einer Markovkette, der durch die Verbundenheitsrelation
@@ -163,39 +206,155 @@ Die so definierte Ordnung ist jedoch im Allgemeinen nicht \emph{total}, da nicht
 für jedes Paar von Zustandsklassen definiert sein muss, ob $G_i\preceq G_j$ oder
 $G_j \preceq G_i$ gilt. Das ist zum Beispiel der Fall, wenn die Klassen nicht
 miteinander verbunden sind, also im Interaktionsgraphen unverbundene Subgraphen
-bilden.
+bilden oder wenn zwei unverbundene Klassen in einem dritten Zustand
+"`zusammenlaufen"'.
 
-\begin{definition}{Abgeschlossene/Transiente Klassen}{mk-abg}
+\begin{definition}{Abgeschlossene Klasse}{mk-abg}
 Sei $G$ eine Zustandsklasse einer Markovkette. $G$ heißt \defw{abgeschlossen},
 wenn es keine Klasse gibt, die von $G$ erreicht werden kann:
 \[
 \nexists H\ne G: G\preceq H
 \]
-Ist $G$ nicht abgeschlossen, wird die Klasse als \defw{transient} bezeichnet.
 \end{definition}
 
 Abgeschlossene Klassen werden zusätzlich nach der Anzahl ihrer Zustände
 unterschieden:
 
-\begin{definition}{Rekurrente/absorbierende Klassen}{mk-rekkurr-abs}
-Sei $G$ eine \link{def:mk-abg}{abgeschlossene Klasse}. Gilt $|G|=1$, heißt $G$
-\defw{absorbierend}, sonst ($|G| > 1$) \defw{rekurrent}.
+\begin{definition}{Absorbierende Klasse/Markovkette}{mk-abs}
+Sei $(X)_{n\in N_0}$ eine Markovkette. Ist $G$ eine \link{def:mk-abg}{abgeschlossene Klasse}
+mit $|G|=1$, so heißt die Klasse $G$ \defw{absorbierend}.
+
+Sind alle abgeschlossenen Klassen absorbierend, so heißt die
+Markovkette \defw{absorbierend}.
 \end{definition}
 
 Sind alle Zustände einer Markovkette miteinander verbunden, gibt es nur eine
 Äquivalenzklasse:
 \begin{definition}{Irreduzibilität}{mk-irred}
 Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$, der durch die
-Verbundenheitsrelation $\lr$ in die Menge $S_{/\lr}$ zerlegt wird. Gilt
+Verbundenheitsrelation $\lr$ in die Menge $S_{/\lr}$ zerlegt wird. Existiert nur
+eine einzige Klasse, das heißt es gilt
 \[
 S_{/\lr}\ = \{S\}
 \]
 heißt die Markovkette \defw{irreduzibel}.
 \end{definition}
+
+Das ist genau der Fall, dass alle Zustände mit allen anderen Zuständen verbunden
+sind, sodass genau eine Klasse besteht.
+
 \begin{lemma}
 Die Klasse $S$ einer irreduziblen Markovkette ist abgeschlossen.
 \end{lemma}
  
 \subsection{Rückkehreigenschaften}
 
-\section{Langzeitverhalten}
+In diesem Abschnitt werden Zustände von Markovketten bezüglich ihres
+Rückkehrverhaltens untersucht\more{wiki-mk-properties}.
+
+\begin{definition}{Rückkehrzeit}{mk-rueckk}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$ und $y\in S$
+\link{def:mk-rekurr}{rekurrent} und der Startzustand $X_0$ der Markovkette.
+Dann heißt
+\[
+T_y = min\{n>0:\ X_n = y\}
+\]
+die (zufällige) \defw{Rückkehrzeit} in den Zustand $y$. Zusätzlich bezeichnet
+\[
+M_y = \{k>0: P(T_y=k|X_0=y > 0\}
+\]
+die Menge der Zeitschritte, in denen ausgehend von $y$ wieder $y$ erreicht
+werden kann.
+\end{definition}
+
+\begin{definition}{Periode eines Zustands}{mk-periode}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$ und $y\in S$ ein
+Zustand, der \emph{nur} in $M_y=\{d, 2d, 3d, ...\}$ Schritten erreicht werden
+kann, so heißt
+\[
+d = \mathrm{ggT}(M_y)
+\]
+die \defw{Periode} des Zustands $y$.
+\end{definition}
+
+\begin{definition}{Aperiodischer Zustand, aperiodische Markovkette}{mk-aperiod}
+Sei $y$ ein Zustand einer Markovkette. Besitzt dieser Zustand die Periode 1, so
+heißt $y$ \defw{aperiodisch}.
+
+Sind alle Zustände einer Markovkette aperiodisch, heißt die Markovkette
+\defw{aperiodisch}.
+\end{definition}
+
+\begin{definition}{Ergodische Markovkette}{mk-ergod}
+Ist eine Markovkette mit endlich vielen Zuständen \link{def:mk-irred}{irreduzibel} und
+\link{def:mk-aperiod}{aperiodisch}, so heißt sie \defw{ergodisch}.
+\end{definition}
+
+Die Zustände eines \link{def:stochp}{stochastischen Prozess} können danach
+unterschieden werden, ob man in jedem Fall zu dem Zustand, in dem man gestartet
+ist, zurückkehren kann (rekurrent) oder nicht (transient)
+\more{brilliant-transience-recurrence}:
+
+\begin{definition}{Rekurrenter Zustand}{mk-rekurr}
+Sei $y$ ein Zustand einer Markovkette. Dann heißt $y$ \defw{rekurrent}, wenn
+es für jeden von $y$ aus \link{def:mk-erreichbar}{erreichbaren} Zustand einen
+Weg zurück zu $i$ gibt.
+\end{definition}
+
+\begin{definition}{Transienter Zustand}{mk-trans}
+Sei $y$ ein Zustand einer Markovkette. Dann heißt $y$ \defw{transient}, wenn $y$
+nicht rekurrent ist.
+\end{definition}
+
+Per Definition besteht bei transienten Zuständen die "`Gefahr"', nicht mehr in
+diese zurückkehren zu können. Auf lange Sicht sind transiente Zustände daher nur
+Zwischenzustände.
+
+Die Eigenschaften \link{def:mk-rekurr}{Rekurrenz} und
+\link{def:mk-trans}{Transienz} sind Klasseneigenschaften: Besitzt ein Zustand
+eine dieser Eigenschaften, so auch alle anderen Zustände der Klasse. (Innerhalb
+einer Klasse sind schließlich immer alle Zustände miteinander verbunden, es gibt
+also immer einen Weg zurück zum Startzustand. Damit "`überträgt"' sich die
+Transienz bzw. Rekurrenz eines Zustands auf die gesamte Klasse.)
+
+\begin{lemma}
+Jede \link{def:mk-abg}{abgeschlossene} Klasse ist rekurrent.
+
+Begründung: Eine abgeschlossene Klasse kann nur betreten, aber nicht mehr
+verlassen werden. Somit sind nur Zustände der Klasse erreichbar, sodass immer
+zum Startzustand zurückgekehrt werden kann.
+\end{lemma}
+
+\begin{example}{Transiente/Rekurrente Zustandsklassen}{mk-tr-rek}
+Gegeben sei eine Markovkette mit folgendem Interaktionsgraph:
+
+\begin{tikzpicture}
+  \node[v] (1) at (2,1) {1};
+  \node[v] (2) at (4,2) {2};
+  \node[v] (3) at (6,2) {3};
+  \node[v] (6) at (5,0) {6};
+  \node[v] (4) at (8,1) {4};
+  \node[v] (5) at (10,1) {5};
+
+  \draw[e] (1) to[loop above] ();
+  \draw[e] (6) -- (1);
+  \draw[e] (6) -- (3);
+  \draw[e] (2) to[bend right] (3);
+  \draw[e] (3) to[bend right] (2);
+  \draw[e] (2) to[loop above] ();
+  \draw[e] (2) -- (6);
+  \draw[e] (6) -- (4);
+  \draw[e] (4) to[bend left] (5);
+  \draw[e] (5) to[bend left] (4);
+\end{tikzpicture}
+
+Die Markovkette besitzt die Zustandsklassen $S_{1}=\{1\}$, $S_{2,3,6} =\{2,3,6\}$
+und $S_{4,5}=\{4, 5\}$. Zustand 1 ist rekurrent, da alle erreichbaren Zustände
+(also nur der Zustand selbst) wieder einen Pfad zurück zum Zustand 1 besitzen.
+Wenn man in 1 startet, kann es also nicht passieren, dass man nicht mehr dahin
+zurückkommt.
+Die Klasse $S_{2,3,6}$ ist transient, da man von dort aus auch in die Klassen
+$S_1$ und $S_{4,5}$ kommen kann, von denen jedoch kein Pfad zurück in die
+"`Startklasse"' führt. Die Klasse $S_{4,5}$ ist rekurrent, da sie (wie auch
+$S_1$) nicht verlassen werden kann.
+\end{example}

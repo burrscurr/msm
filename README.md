@@ -27,10 +27,12 @@ kein offizielles Skript für das Fach (wtf?).
 - [ ] └ Anwendungsbeispiele
 - [ ] Markov-Ketten
 - [x] ├ Definition
-- [x] ├ Eigenschaften von Zuständen
-- [ ] ├ Rückkehrzeiten
-- [ ] ├ Langzeitverhalten
-- [ ] └ Stetige Zeit
+- [x] ├ Zustandsklassen
+- [x] ├ Rückkehreigenschaften
+- [x] ├ Langzeitverhalten
+- [ ] ├ Reversible ergodische Markovketten
+- [ ] ├ Markovketten mit unendlichem Zustandsraum
+- [ ] └ Markovketten in stetiger Zeit
 - [ ] Markov-Chain-Monte-Carlo
 - [ ] ├ Konzept
 - [ ] ├ Anwendungsbeispiele
