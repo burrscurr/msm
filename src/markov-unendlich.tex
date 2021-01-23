@@ -1,0 +1,29 @@
+Bisher haben wir endliche Markovketten betrachtet. Markovketten können jedoch
+auch einen unendlich großen Zustandsraum wie $S=\N$ besitzen (der Zustandsraum
+muss jedoch abzählbar unendlich sein). Dann können wir wie zuvor auch
+\begin{itemize}
+\item die Übergangsmatrix $\Pi$ aufstellen,
+\item Äquivalenzklassen betrachten,
+\item Interaktionsgraphen untersuchen,
+\item Zustände bezüglich ihrer Periode untersuchen.
+\end{itemize}
+
+Allerdings ist das Rückkehrverhalten und die stationäre Verteilung bei
+ergodischen unendlichen Markovketten anders. Wir definieren daher die Begriffe
+\link{def:mk-rekurr}{rekurrent} und \link{def:mk-trans}{transient} neu und
+unterscheiden unendliche und endliche Rückkehrzeit bei rekurrenten Zuständen.
+
+\begin{definition}{Rekurrent, null-rekurrent, transient}{mk-inf-rekurr}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit abzählbar unendlich großem
+Zustandsraum $S$. Dann heißt ein Zustand $y\in S$ \defw{rekurrent}, falls die
+erwartete Rückkehrzeit in den Zustand endlich ist.
+
+$y$ heißt \defw{null-rekurrent}, falls die Rückkehrzeit unendlich, die Rückkehr
+aber sicher ist, d.h mit Wahrscheinlichkeit 1 stattfindet.
+
+Zustand $y$ heißt \defw{transient}, falls mit positiver Wahrscheinlihckeit keine
+Rückkehr zu $y$ stattfindet.
+\end{definition}
+
+\warn{Hier ist nicht klar, ob diese Definitionen äquivalent zu den bisherigen
+Definitionen sind, oder ausschließlich für unendliche Markovketten gelten.}

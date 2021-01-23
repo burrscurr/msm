@@ -19,7 +19,7 @@
 % Graphen
 \usepackage{tikz}
 \tikzset{
-    v/.style={circle,minimum size=2ex, draw=black},
+    v/.style={circle,minimum size=2ex, text width=5mm, align=center, draw=black},
     e/.style={-stealth, thick}}
 
 % Mathematikfoo
@@ -132,7 +132,7 @@ linesnumbered
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\lr}{\leftrightarrow}
-\DeclareMathOperator{\T}{T}       % Matrixtransposition
+\DeclareMathOperator{\T}{\text{T}}       % Matrixtransposition
 \DeclareMathOperator{\E}{E}       % Erwartungswert
 \DeclareMathOperator{\Var}{Var}   % Varianz
 
@@ -165,7 +165,10 @@ offizielles Skript (WTF?)}}
 
   \chapter{Markov-Ketten}
   \input{markov-eigenschaften.tex}
+  \section{Langzeitverhalten}
   \input{markov-langzeitverhalten.tex}
+  \section{Markovketten mit unendlichem Zustandsraum}
+  \input{markov-unendlich.tex}
 
   \printbibliography
 \end{document}

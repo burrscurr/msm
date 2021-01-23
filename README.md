@@ -30,8 +30,8 @@ kein offizielles Skript für das Fach (wtf?).
 - [x] ├ Zustandsklassen
 - [x] ├ Rückkehreigenschaften
 - [x] ├ Langzeitverhalten
-- [ ] ├ Reversible ergodische Markovketten
-- [ ] ├ Markovketten mit unendlichem Zustandsraum
+- [x] ├ Reversible ergodische Markovketten
+- [x] ├ Markovketten mit unendlichem Zustandsraum
 - [ ] └ Markovketten in stetiger Zeit
 - [ ] Markov-Chain-Monte-Carlo
 - [ ] ├ Konzept
