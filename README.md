@@ -20,7 +20,8 @@ kein offizielles Skript für das Fach (wtf?).
 - [x] ├ Annahme-Verwerfungs-Methode
 - [x] ├ Importance Sampling
 - [ ] ├ Box-Muller-Polarmethode
-- [ ] └ Erzeugung von Zufallsvektoren
+- [ ] ├ Erzeugung von Zufallsvektoren
+- [ ] └ Mehrdimensionale Normalverteilung
 - [ ] Monte-Carlo (Skriptausschnitt in OPAL verfügbar)
 - [ ] ├ Zentraler Grenzwertsatz
 - [ ] ├ Satz von Moivre-Laplace
