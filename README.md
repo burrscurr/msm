@@ -9,6 +9,11 @@ Skript für das Fach Mathematisch-Stochastische Modelle: Markovketten und
 Monte-Carlo-Simulationen an der [HTW Dresden](https://htw-dresden.de). Es gibt
 kein offizielles Skript für das Fach (wtf?).
 
+Das Skript ist keine 1:1-Mitschrift aus der Vorlesung, sondern ist möglichst
+pragmatisch und verständnisorientiert. Derzeit umfassen die meisten Abschnitte
+vor allem die Definitionen und Sätze, für die Zukunft wären aber weitere
+Beispiele, Erklärungen und Beweise cool.
+
 ## Fortschritt
 
 - [x] Grundlagen der Wahrscheinlichkeitstheorie
