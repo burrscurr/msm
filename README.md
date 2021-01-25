@@ -24,7 +24,7 @@ Beispiele, Erklärungen und Beweise cool.
 - [x] ├ Inversionsmethode
 - [x] ├ Annahme-Verwerfungs-Methode
 - [x] ├ Importance Sampling
-- [ ] ├ Box-Muller-Polarmethode
+- [x] ├ Box-Muller-Polarmethode
 - [ ] ├ Erzeugung von Zufallsvektoren
 - [ ] └ Mehrdimensionale Normalverteilung
 - [ ] Monte-Carlo (Skriptausschnitt in OPAL verfügbar)

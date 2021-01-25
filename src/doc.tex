@@ -40,6 +40,7 @@ linesnumbered
 
 % Literatur
 \usepackage{biblatex}
+\addbibresource{ref/zufallszahlen.bib}
 \addbibresource{ref/markov.bib}
 
 % Einrahmungen
@@ -132,9 +133,12 @@ linesnumbered
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\lr}{\leftrightarrow}
-\DeclareMathOperator{\T}{\text{T}}       % Matrixtransposition
-\DeclareMathOperator{\E}{E}       % Erwartungswert
-\DeclareMathOperator{\Var}{Var}   % Varianz
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} % partielle Ableitungen
+\DeclareMathOperator{\T}{\text{T}}   % Matrixtransposition
+\DeclareMathOperator{\E}{E}          % Erwartungswert
+\DeclareMathOperator{\Var}{Var}      % Varianz
+\DeclareMathOperator{\Det}{det}      % Determinante
+\DeclareMathOperator{\atan}{atan}    % tan^-1
 
 % Interne Referenzen z.B. für definierte Begriffe
 \newcommand{\link}[2]{\hyperref[#1]{#2}}
@@ -159,16 +163,25 @@ offizielles Skript (WTF?)}}
 
   \tableofcontents
 
-  \input{wahrscheinlichkeitstheorie.tex}
-  \input{verteilungen.tex}
-  \input{zufallszahlengenerierung.tex}
+  \chapter{Grundlagen der Wahrscheinlichkeitstheorie}
+    \input{wahrscheinlichkeitstheorie.tex}
+    \section{Zufallsvariablen}
+    \input{zufallsvariablen-zufallsvektoren.tex}
+    \section{Erwartungswert und Varianz}
+    \input{erwartungswert-varianz.tex}
+
+  \chapter{Wahrscheinlichkeitsverteilungen}
+    \input{verteilungen.tex}
+
+  \chapter{Generierung von Zufallszahlen}
+    \input{zufallszahlengenerierung.tex}
 
   \chapter{Markov-Ketten}
-  \input{markov-eigenschaften.tex}
-  \section{Langzeitverhalten}
-  \input{markov-langzeitverhalten.tex}
-  \section{Markovketten mit unendlichem Zustandsraum}
-  \input{markov-unendlich.tex}
+    \input{markov-eigenschaften.tex}
+    \section{Langzeitverhalten}
+    \input{markov-langzeitverhalten.tex}
+    \section{Markovketten mit unendlichem Zustandsraum}
+    \input{markov-unendlich.tex}
 
   \printbibliography
 \end{document}

@@ -1,61 +1,6 @@
-\chapter{Generierung von Zufallszahlen}
-
 Dieses Kapitel behandelt Grundlagen und Methoden zur Generierung von beliebig
 verteilten Zufallszahlen durch einen Zufallszahlengenerator mit gleichverteilten
 Zufallszahlen.
-
-\section{Zufallsvektoren}
-
-\begin{definition}{Zufallsvektor}{zvektor}
-Seien $X_1, ..., X_n$ \link{def:zvar}{Zufallsvariablen}. Die Zusammenfassung
-\[\underline{X} = (X_1, ..., X_n)^T\]
-zu einem Vektor heißt \defw{Zufallsvektor}. Sind alle Komponenten des Vektors
-diskret beziehungsweise stetig, heißt der Zufallsvektor diskret beziehungsweise
-stetig.
-\end{definition}
-
-Die Werte eines (zweidimensionalen) diskreten Zufallsvektors lassen sich in einer Matrix
-zusammenfassen:
-
-\begin{definition}{Gemeinsame Verteilung eines Zufallsvektors}{vert-zvektor}
-Sei $\underline{X} = (X, Y)^T$ ein diskreter Zufallsvektor, wobei die
-Zufallsvariable $X$ die Werte $x_0, x_1, ..., x_n$ und $Y$ die Werte $y_0, y_1, ...,
-y_m$ annimmt. Dann bezeichnet die Matrix
-\[(p_{ij})_{i=0,...,n;j=0,...,m} \qquad mit\ p_{ij} = P(X=x_i, Y=y_j)\]
-die \defw{gemeinsame Verteilung} von $\underline{X}$.
-\end{definition}
-
-Die Summierung von Zeilen bzw. Spalten der Matrix werden als Randverteilung
-bezeichnet:
-\[p_{i.}:=P(X=x_i) = \sum_j p_{ij}\]
-\[p_{.j}:=P(Y=y_j) = \sum_i p_{ij}\]
-Für stetige Zufallsvariablen $X$ und $Y$ mit gemeinsamer \link{def:dichte}{Dichte}
-$\rho_{(X, Y)}\ge 0$ können folgende \defw{Randdichten} abgeleitet werden:
-\[\rho_X(x) = \int\rho_{(X,Y)}(x,y)\mathrm{d} y\quad x\in\R\]
-\[\rho_Y(y) = \int\rho_{(X,Y)}(x,y)\mathrm{d} x\quad y\in\R\]
-
-Analog zur \link{def:bedw}{bedingten Wahrscheinlichkeit} von Ereignissen lässt sich
-auch für Zufallsvektoren eine bedingte Wahrscheinlichkeit definieren:
-
-\begin{definition}{Bedingte Wahrscheinlichkeit/Bedingte Dichte}{bwahr-zvektor}
-Sei $\underline{X} = (X, Y)^T$ ein diskreter Zufallsvektor mit
-\link{def:vert-zvektor}{gemeinsamer Verteilung} $(p_{ij})_{i,j=0,1,...}$. Dann ist
-mit
-\[P(Y=y_j|X=x_i) := \frac{P(X=x_i, Y=y_j)}{P(X=x_i)} = \frac{p_{ij}}{p_{i.}}\]
-die \defw{bedingte Wahrscheinlichkeit} von $Y=y_j$ unter Bedingung $X=x_i$ gegeben.
-
-Ist $\underline{X}$ ein stetiger Zufallsvektor mit gemeinsamer Dichte
-$\rho_{(X,Y)}$, so bezeichnen die Funktionen
-\[\rho_{X|Y=y}(x) = \frac{\rho_{(X,Y)}(x,y)}{\rho_Y(y)}\]
-\[\rho_{Y|X=x}(y) = \frac{\rho_{(X,Y)}(x,y)}{\rho_X(x)}\]
-die \defw{bedingte Dichte} von $X$ unter $Y=y$ bzw. $Y$ unter $X=x$.
-\end{definition}
-
-Ebenso analog zur \link{def:bedw}{bedingten Wahrscheinlichkeit} von Ereignissen kann
-der \link{satz:bayes}{Satz von Bayes} für diskrete bzw. stetige Zufallsvektoren
-formuliert werden:
-\[p_{ij} = P(Y=y_j|X=x_i)\cdot p_{i.}\]
-\[\rho_{(X,Y)} = \rho_{Y|X=x}(y)\cdot\rho_X(x)\]
 
 \section{Inversionsmethode}
 
@@ -149,7 +94,6 @@ Verteilung aus:
   }
 }
 
-
 \caption{Annahme-Verwerfungs-Methode}\label{algo:av-methode}
 \end{algorithm}
 
@@ -198,6 +142,160 @@ Der entsprechende Algorithmus sieht dann so aus:
 \caption{Annahme-Verwerfungs-Methode mit Importance Sampling}\label{algo:av-methode-is}
 \end{algorithm}
 
-\section{Box-Müller-Polarmethode}
+\section{Erzeugung normalverteilter Zufallszahlen}
+
+\begin{theorem}{Transformationssatz (2D)}{trafo-2d}
+Seien $\underline{X} = (X, Y)^T$ und $\underline{Z} = (S,T)^T$
+\link{def:zvektor}{Zufallsvektoren} mit gemeinsamer Dichte
+$\rho_{X,Y}$ bzw. $\rho_{S,T}$. Weiterhin sei $g$ eine bijektive Funktion mit
+Umkehrfunktion $g^{-1}$, die beide Zufallsvektoren aufeinander
+abbildet:
+\begin{align*}
+g: \R^2\to\R^2: \begin{pmatrix}x\\y\end{pmatrix}\mapsto
+  \begin{pmatrix}g_1(x,y)\\g_2(x,y)\end{pmatrix} =
+  \begin{pmatrix}s\\t\end{pmatrix} \\
+g^{-1}: \R^2\to\R^2: \begin{pmatrix}s\\t\end{pmatrix}\mapsto
+  \begin{pmatrix}h_1(s,t)\\h_2(s, t)\end{pmatrix} =
+  \begin{pmatrix}x\\y\end{pmatrix}
+\end{align*}
+Dann gilt für die Wahrscheinlichkeitsdichte von $\underline{Z}$:
+\[
+\rho_{S,T}(s,t) = \rho_{X,Y}\big(g^{-1}(s,t)\big)\cdot\Det(J) =
+  \rho_{X,Y}(h_1(s,t), h_2(s,t)) \cdot \Det(J)
+\]
+wobei $J$ die Jacobi-Matrix\more{wiki-jacobi} von $g^{-1}$ ist.
+\end{theorem}
+
+Ähnlich wie der \link{satz:trafo}{"`normale"' Transformationssatz} formalisiert der
+2D-Tranformationssatz, wie sich die Wahrscheinlichkeitsdichte bei der Abbildung
+einer Zufallsvariablen durch eine Funktion $g$ verändert. Das ist ein hilfreiches
+Werkzeug bei der Erzeugung von Zufallszahlen, da wir im Allgemeinen
+$U(0,1)$-verteilte Zufallszahlen in komplexere Verteilungen umformen möchten.
+
+\subsection{Box-Muller-Methode}
+
+Die Box-Muller-Methode nutzt den Transformationssatz und die Polardarstellung
+von Koordinaten zur Erzeugung zweidimensional normalverteilter Zufallszahlen.
+
+Seien $X\sim N(0,1)$ und $Y\sim N(0,1)$ \link{vert-stdnormal}{standardnormalverteilte}
+und \link{def:zvar-unabh}{unabhängige} Zufallsvariablen. Damit bestehen folgende
+Dichtefunktionen:
+\begin{align*}
+\rho_X(x) = \frac{1}{\sqrt{2\pi}}\cdot\exp\Big(-\frac{x^2}{2}\Big)\\
+\rho_Y(y) = \frac{1}{\sqrt{2\pi}}\cdot\exp\Big(-\frac{y^2}{2}\Big)
+\end{align*}
+Da die Zufallsvariablen unabhängig sind, können wir Satz \ref{satz:randd}
+anwenden um die gemeinsame Dichte zu bestimmen:
+\[
+\rho_{X,Y}(x,y) = \rho_X(x)\cdot\rho_Y(y) =
+\frac{1}{2\pi}\cdot\exp\Big(-\frac{x^2+y^2}{2}\Big)
+\]
+Wir wenden den Transformationssatz mit einer Funktion $g$ an, die unsere
+kartesischen Koordinaten $X,Y$ in Polarkoordinaten \more{wolfram-polar} $Z,\Phi$
+umwandelt:
+\begin{align*}
+g: \R^2 \to \R^2: (x,y) &\mapsto (r^2 =x^2+y^2,\phi=\atan\frac{y}{x}) \\
+g^{-1}: \R^2 \to \R^2: (z,\phi) &\mapsto (x=\sqrt{z}\cdot\cos\phi,y=\sqrt{z}\cdot\sin\phi)
+\end{align*}
+Dabei wird $z=r^2$ definiert. Als Jacobi-Matrix von $g^{-1}$ ergibt sich
+\[
+\renewcommand*{\arraystretch}{1.8}
+J = \begin{pmatrix}\pd{h_1}{z} & \pd{h_1}{\phi} \\ \pd{h_2}{z} & \pd{h_2}{\phi}\end{pmatrix}
+ = \begin{pmatrix}\frac{1}{2\sqrt{z}}\cos\phi & -\sqrt{z}\sin\phi \\
+                  \frac{1}{2\sqrt{z}}\sin\phi &  \sqrt{z}\cos\phi\end{pmatrix}
+\]
+mit Determinante (Anwendung des trigonometrischen Pythagoras)
+\[
+\det J = \frac{1}{2}\cos^2\phi + \frac{1}{2}\sin^2\phi = \frac{1}{2}
+\]
+Durch Anwendung des \link{satz:trafo-2d}{Transformationssatzes} ergibt sich die
+Verteilung $\rho_{Z,\Phi}$ der durch $g$ in Polarkoordinaten umgewandelten
+Werte:
+\begin{align*}
+\rho_{Z,\Phi} &= \rho_{X,Y}(\sqrt{z}\cos\phi,\sqrt{z}\sin\phi)\cdot\det J \\
+  &= \frac{1}{2\pi}\cdot
+        \exp\Big(-\frac{(\sqrt{z}\cos\phi)^2+(\sqrt{z}\sin\phi)^2}{2}\Big)
+        \cdot\det J \\
+  &= \frac{1}{2\pi}\cdot\frac{1}{2}\exp\Big(-\frac{z}{2}\Big)
+\end{align*}
+Diese Verteilung besteht aus zwei bekannten Wahrscheinlichkeitsdichten: Der
+erste Teil ist eine \link{vert-gleich}{Gleichverteilung} auf $(0,2\pi)$,
+der zweite Teil ist eine \link{vert-exp}{Exponentialverteilung} mit
+Parameter $\alpha=0.5$ (vgl. Beispiel \ref{bsp:exp}). Damit könnten wir
+zweidimensional normalverteilte Zufallsvariablen erzeugen, wenn wir unabhängige
+Zufallsvariablen $\Phi\sim U(0,2\pi)$ und $Z\sim Exp(0.5)$ erzeugen können.
+Da wir annehmen, nur Zufallszahlen $U_1, U_2, ... \sim U(0,1)$ zur Verfügung zu
+haben, wenden wir die \link{satz:inversionsm}{Inversionsmethode} an:
+\begin{align*}
+\Phi &= 2\pi \cdot U_1 \\
+Z &= -2\ \ln(1-U_2)
+\end{align*}
+Durch Auflösung der Polarkoordinaten und $z = r^2$ erhält man:
+\begin{align*}
+X = \sqrt{-2\,\ln(1-U_2)}\cdot\cos(2\pi\cdot U_1) \\
+Y = \sqrt{-2\,\ln(1-U_2)}\cdot\sin(2\pi\cdot U_1)
+\end{align*}
+
+Damit sind die Zufallsvariablen $X,Y \sim N(0,1)$ standardnormalverteilt. Um
+$N(\mu, \sigma^2)$-verteilte Zufallsvariablen zu erzeugen, kann eine lineare
+Transformation angewandt werden.
+
+\medskip
+Damit ergibt sich folgender Algorithmus zur Erzeugung von unabhängigen,
+normalverteilten Zufallszahlen $X~N(\mu, \sigma^2)$. Der Algorithmus erzeugt
+immer Paare von normalverteilten Zufallszahlen:
+
+\begin{algorithm}[h!]
+\DontPrintSemicolon
+\LinesNumbered
+
+\While{1}{
+  Erzeuge $u\sim U(0,1)$\;
+  Erzeuge $v\sim U(0,1)$\;
+  Setze $z_1 = \sqrt{-2\,\ln(1-u)}\cdot\cos(2\pi\cdot v)$\;
+  Setze $z_2 = \sqrt{-2\,\ln(1-u)}\cdot\sin(2\pi\cdot v)$\;
+  Setze $x_1 = \sigma\cdot z_1 + \mu$\;
+  Setze $x_2 = \sigma\cdot z_2 + \mu$\;
+  Gib $x_1$ aus\;
+  Gib $x_2$ aus\;
+}
+
+\caption{Box-Muller-Methode}\label{algo:box-muller}
+\end{algorithm}
+
+\subsection{Methode von Box, Muller, Marsaglia (Polarmethode)}
+
+Die Polarmethode ist eine weitere Methode zur Erzeugung normalverteilter
+Zufallszahlen, die die Auswertung von trigonometrischen Funktionen und des
+Logarithmus vermeidet und daher schneller als die Box-Muller-Methode ist.
+
+Der folgende Algorithmus implementiert die Polarmethode:
+\begin{algorithm}[h!]
+\DontPrintSemicolon
+\LinesNumbered
+\SetKw{Continue}{continue}
+
+\While{1}{
+  Erzeuge $u\sim U(0,1)$\;
+  Erzeuge $v\sim U(0,1)$\;
+  Setze $x=2u-1$\;
+  Setze $y=2v-1$\;
+  Setze $s = x^2 + y^2$\;
+  \If{$s\ge 1$}{
+    \Continue
+  }
+  \eIf{$s \ne 0$}{
+    Setze $z_1 = x\sqrt{\frac{-2\,\ln s}{s}}$\;
+    Setze $z_2 = y\sqrt{\frac{-2\,\ln s}{s}}$\;
+  }{
+    Setze $z_1 = z_2 = 0$\;
+  }
+}
+
+\caption{Box-Muller-Marsaglia-Methode (Polarmethode)}
+\label{algo:box-muller-marsaglia}
+\end{algorithm}
+
+\section{Erzeugung mehrdimensionaler Zufallszahlen}
 
 TODO
