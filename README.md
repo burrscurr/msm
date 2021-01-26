@@ -16,12 +16,18 @@ Beispiele, Erklärungen und Beweise cool.
 
 ## Fortschritt
 
-- [x] Grundlagen der Wahrscheinlichkeitstheorie
+- [ ] Grundlagen der Wahrscheinlichkeitstheorie
+- [x] ├ Grundbegriffe
+- [x] ├ Unabhängigkeit, bedingte Wahrscheinlichkeit
+- [x] ├ Zufallsvektoren
+- [x] ├ Erwartungswert, Varianz
+- [ ] └ Covarianz, Korrelationskoeffizient
 - [x] Wahrscheinlichkeitsverteilungen
 - [x] ├ Diskrete Verteilungen
 - [x] └ Stetige Verteilungen
 - [ ] Erzeugung von Zufallszahlen
-- [x] ├ Inversionsmethode
+- [ ] ├ Inversionsmethode (diskret)
+- [x] ├ Inversionsmethode (stetig)
 - [x] ├ Annahme-Verwerfungs-Methode
 - [x] ├ Importance Sampling
 - [x] ├ Box-Muller-Polarmethode
