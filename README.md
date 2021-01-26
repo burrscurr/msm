@@ -16,39 +16,39 @@ Beispiele, Erklärungen und Beweise cool.
 
 ## Fortschritt
 
-- [ ] Grundlagen der Wahrscheinlichkeitstheorie
-- [x] ├ Grundbegriffe
-- [x] ├ Unabhängigkeit, bedingte Wahrscheinlichkeit
-- [x] ├ Zufallsvektoren
-- [x] ├ Erwartungswert, Varianz
-- [ ] └ Covarianz, Korrelationskoeffizient
-- [x] Wahrscheinlichkeitsverteilungen
-- [x] ├ Diskrete Verteilungen
-- [x] └ Stetige Verteilungen
-- [ ] Erzeugung von Zufallszahlen
-- [ ] ├ Inversionsmethode (diskret)
-- [x] ├ Inversionsmethode (stetig)
-- [x] ├ Annahme-Verwerfungs-Methode
-- [x] ├ Importance Sampling
-- [x] ├ Box-Muller-Polarmethode
-- [ ] ├ Erzeugung von Zufallsvektoren
-- [ ] └ Mehrdimensionale Normalverteilung
-- [ ] Monte-Carlo (Skriptausschnitt in OPAL verfügbar)
-- [ ] ├ Zentraler Grenzwertsatz
-- [ ] ├ Satz von Moivre-Laplace
-- [ ] └ Anwendungsbeispiele
-- [ ] Markov-Ketten
-- [x] ├ Definition
-- [x] ├ Zustandsklassen
-- [x] ├ Rückkehreigenschaften
-- [x] ├ Langzeitverhalten
-- [x] ├ Reversible ergodische Markovketten
-- [x] ├ Markovketten mit unendlichem Zustandsraum
-- [ ] └ Markovketten in stetiger Zeit
-- [ ] Markov-Chain-Monte-Carlo
-- [ ] ├ Konzept
-- [ ] ├ Anwendungsbeispiele
-- [ ] └ Metropolis-Algorithmus
+- ⭕ Grundlagen der Wahrscheinlichkeitstheorie
+- ✅ ├ Grundbegriffe
+- ✅ ├ Unabhängigkeit, bedingte Wahrscheinlichkeit
+- ✅ ├ Zufallsvektoren
+- ✅ ├ Erwartungswert, Varianz
+- ⭕ └ Covarianz, Korrelationskoeffizient
+- ✅ Wahrscheinlichkeitsverteilungen
+- ✅ ├ Diskrete Verteilungen
+- ✅ └ Stetige Verteilungen
+- ⭕ Erzeugung von Zufallszahlen
+- ⭕ ├ Inversionsmethode (diskret)
+- ✅ ├ Inversionsmethode (stetig)
+- ✅ ├ Annahme-Verwerfungs-Methode
+- ✅ ├ Importance Sampling
+- ✅ ├ Box-Muller-Polarmethode
+- ⭕ ├ Erzeugung von Zufallsvektoren
+- ⭕ └ Mehrdimensionale Normalverteilung
+- ⭕ Monte-Carlo (Skriptausschnitt in OPAL verfügbar)
+- ⭕ ├ Zentraler Grenzwertsatz
+- ⭕ ├ Satz von Moivre-Laplace
+- ⭕ └ Anwendungsbeispiele
+- ⭕ Markov-Ketten
+- ✅ ├ Definition
+- ✅ ├ Zustandsklassen
+- ✅ ├ Rückkehreigenschaften
+- ✅ ├ Langzeitverhalten
+- ✅ ├ Reversible ergodische Markovketten
+- ✅ ├ Markovketten mit unendlichem Zustandsraum
+- ⭕ └ Markovketten in stetiger Zeit
+- ⭕ Markov-Chain-Monte-Carlo
+- ⭕ ├ Konzept
+- ⭕ ├ Anwendungsbeispiele
+- ⭕ └ Metropolis-Algorithmus
 
 ## Mitmachen
 
