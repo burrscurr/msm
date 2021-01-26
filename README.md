@@ -37,18 +37,22 @@ Beispiele, Erklärungen und Beweise cool.
 - ⭕ ├ Zentraler Grenzwertsatz
 - ⭕ ├ Satz von Moivre-Laplace
 - ⭕ └ Anwendungsbeispiele
-- ⭕ Markov-Ketten
+- ✅ Markov-Ketten
 - ✅ ├ Definition
 - ✅ ├ Zustandsklassen
 - ✅ ├ Rückkehreigenschaften
 - ✅ ├ Langzeitverhalten
 - ✅ ├ Reversible ergodische Markovketten
-- ✅ ├ Markovketten mit unendlichem Zustandsraum
-- ⭕ └ Markovketten in stetiger Zeit
+- ✅ └ Markovketten mit unendlichem Zustandsraum
 - ⭕ Markov-Chain-Monte-Carlo
 - ⭕ ├ Konzept
 - ⭕ ├ Anwendungsbeispiele
-- ⭕ └ Metropolis-Algorithmus
+- ⭕ ├ Metropolis-Algorithmus
+- ⭕ └ Ising-Modell
+- ⭕ Zelluläre Automaten
+- ⭕ ├ Konzept/Definition
+- ⭕ ├ Markovketten in stetiger Zeit
+- ⭕ └ Zelluläre Automaten in stetiger Zeit
 
 ## Mitmachen
 
