@@ -26,12 +26,12 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage{dsfont}   % \mathds{1}
 
 % Algorithmen
 \usepackage[
 german,
-ruled,
-linesnumbered
+ruled
 ]{algorithm2e}
 
 % Verlinkungen
@@ -134,11 +134,13 @@ linesnumbered
 \newcommand{\e}{\mathrm{e}}
 \newcommand{\lr}{\leftrightarrow}
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} % partielle Ableitungen
-\DeclareMathOperator{\T}{\text{T}}   % Matrixtransposition
+\newcommand{\zvec}[1]{\overrightarrow{\mathrm{#1}}}
+\newcommand{\T}{\top}                % Matrixtransposition
 \DeclareMathOperator{\E}{E}          % Erwartungswert
 \DeclareMathOperator{\Var}{Var}      % Varianz
 \DeclareMathOperator{\Det}{det}      % Determinante
 \DeclareMathOperator{\atan}{atan}    % tan^-1
+\DeclareMathOperator{\Cov}{Cov}      % Kovarianz
 
 % Interne Referenzen z.B. für definierte Begriffe
 \newcommand{\link}[2]{\hyperref[#1]{#2}}
@@ -163,7 +165,7 @@ offizielles Skript (WTF?)}}
 
   \tableofcontents
 
-  \chapter{Grundlagen der Wahrscheinlichkeitstheorie}
+  \chapter{Grundlagen der Wahrscheinlichkeitsrechnung}
     \input{wahrscheinlichkeitstheorie.tex}
     \section{Zufallsvariablen}
     \input{zufallsvariablen-zufallsvektoren.tex}

@@ -1,5 +1,30 @@
 \section{Diskrete Verteilungen}
 
+\begin{definition}{Verteilungsfunktion}{vertf-disk}
+Sei $X$ eine diskrete \link{def:zvar}{Zufallsvariable} mit Zustandsraum $x_0,
+x_1, \ldots$. Die Funktion
+\[
+F_X:\R\to\R,\ F_X(z) = P(X \le z)
+\]
+heißt \defw{Verteilungsfunktion} der Zufallsvariable $X$. Die
+Verteilungsfunktion eine Treppenfunktion, die an den Stellen $x_k$ um
+$p_k = P(X=x_k)$ springt. Darum gilt:
+\[
+F_X(z) = \sum_{x_k\le z}P(X=x_k) = \sum_{x_k\le z} p_k
+\]
+\end{definition}
+
+Eine Art Umkehrfunktion der Verteilungsfunktion ist die Quantilfunktion:
+\begin{definition}{Quantilfunktion}{quantilf}
+Sei $F_X(z) = P(X\le z)$ die Verteilungsfunktion einer diskreten Zufallsvariable
+$X$. Dann heißt
+\[
+F_X^{-1}(z) = \mathrm{min}\{x\in\R: F(x) \ge z\},\quad z\in(0,1)
+\]
+die \defw{Quantilfunktion} von $X$.
+\end{definition}
+
+\medskip
 Im Folgenden Abschnitt sei $X$ eine diskrete \link{def:zvar}{Zufallsvariable}
 mit Zustandsraum $S$, $A \in S$ und $P$ eine
 \link{def:verteilung}{Wahrscheinlichkeitsverteilung} dieser Zufallsvariable.

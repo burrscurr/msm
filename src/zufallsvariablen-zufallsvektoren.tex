@@ -39,7 +39,7 @@ Zufallsvariablen betrachtet.
 \begin{definition}{Zufallsvektor}{zvektor}
 Seien $X_1, ..., X_n$ \link{def:zvar}{Zufallsvariablen}. Die Zusammenfassung
 \[
-\underline{X} = (X_1, ..., X_n)^T
+\zvec{X} = (X_1, ..., X_n)^\T
 \]
 zu einem Vektor heißt \defw{Zufallsvektor}. Sind alle Komponenten des Vektors
 diskret beziehungsweise stetig, heißt der Zufallsvektor diskret beziehungsweise
@@ -52,20 +52,20 @@ Die Werte eines (zweidimensionalen) diskreten Zufallsvektors lassen sich in eine
 zusammenfassen:
 
 \begin{definition}{Gemeinsame Verteilung eines Zufallsvektors}{vert-zvektor}
-Sei $\underline{X} = (X, Y)^T$ ein diskreter Zufallsvektor, wobei die
+Sei $\zvec{X} = (X, Y)^\T$ ein diskreter Zufallsvektor, wobei die
 Zufallsvariable $X$ die Werte $x_0, x_1, ..., x_n$ und $Y$ die Werte $y_0, y_1, ...,
 y_m$ annimmt. Dann bezeichnet die Matrix
 \[
 (p_{ij})_{i=0,...,n;j=0,...,m} \qquad mit\ p_{ij} = P(X=x_i, Y=y_j)
 \]
-die \defw{gemeinsame Verteilung} von $\underline{X}$.
+die \defw{gemeinsame Verteilung} von $\zvec{X}$.
 
-Die Verteilung eines stetigen Zufallsvektors $(X,Y)^T$ wird durch die gemeinsame
+Die Verteilung eines stetigen Zufallsvektors $(X,Y)^\T$ wird durch die gemeinsame
 Dichte $\rho_{X,Y}(x,y)$ beschrieben.
 \end{definition}
 
 \begin{definition}{Randverteilung}{randv}
-Sei $(X,Y)^T$ ein diskreter Zufallsvektor mit gemeinsamer Verteilung $p$.
+Sei $(X,Y)^\T$ ein diskreter Zufallsvektor mit gemeinsamer Verteilung $p$.
 Die Summierung von Zeilen bzw. Spalten der Matrix werden als
 \defw{Randverteilung} bezeichnet:
 \begin{align*}
@@ -76,7 +76,7 @@ p_{.j}:=P(Y=y_j) = \sum_i p_{ij}
 
 Analog gilt für stetige Zufallsvektoren:
 \begin{definition}{Randdichte}{randd}
-Sei $(X,Y)^T$ ein stetiger Zufallsvektor mit gemeinsamer \link{def:dichte}{Dichte}
+Sei $(X,Y)^\T$ ein stetiger Zufallsvektor mit gemeinsamer \link{def:dichte}{Dichte}
 $\rho_{(X, Y)}$. Dann werden
 \begin{align*}
 \rho_X(x) = \int\rho_{(X,Y)}(x,y)\mathrm{d} y\quad x\in\R\\
@@ -86,7 +86,7 @@ als \defw{Randdichten} des Zufallsvektors bezeichnet.
 \end{definition}
 
 \begin{theorem}{}{randd}
-Sei $(X,Y)^T$ ein Zufallsvektor von unabhängigen Zufallsvariablen $X$ und $Y$
+Sei $(X,Y)^\T$ ein Zufallsvektor von unabhängigen Zufallsvariablen $X$ und $Y$
 mit zugehörigen Randdichten $\rho_X$ und $\rho_Y$. Dann kann die gemeinsame
 Verteilung $\rho_{X,Y}$ berechnet werden durch:
 \[
@@ -100,7 +100,7 @@ Analog zur \link{def:bedw}{bedingten Wahrscheinlichkeit} von Ereignissen lässt 
 auch für Zufallsvektoren eine bedingte Wahrscheinlichkeit definieren:
 
 \begin{definition}{Bedingte Wahrscheinlichkeit}{bedwahr}
-Sei $\underline{X} = (X, Y)^T$ ein diskreter Zufallsvektor mit
+Sei $\zvec{X} = (X, Y)^\T$ ein diskreter Zufallsvektor mit
 \link{def:vert-zvektor}{gemeinsamer Verteilung} $(p_{ij})_{i,j=0,1,...}$. Dann ist
 mit
 \[
@@ -110,11 +110,11 @@ die \defw{bedingte Wahrscheinlichkeit} von $Y=y_j$ unter Bedingung $X=x_i$ gegeb
 \end{definition}
 
 \begin{definition}{Bedingte Dichte}{bedd}
-Ist $\underline{X}$ ein stetiger Zufallsvektor mit gemeinsamer Dichte
+Ist $\zvec{X}$ ein stetiger Zufallsvektor mit gemeinsamer Dichte
 $\rho_{(X,Y)}$, so bezeichnen die Funktionen
 \begin{align*}
-\rho_{X|Y=y}(x) = \frac{\rho_{(X,Y)}(x,y)}{\rho_Y(y)}\\
-\rho_{Y|X=x}(y) = \frac{\rho_{(X,Y)}(x,y)}{\rho_X(x)}
+\rho_{X|Y=y}(x) = \frac{\rho_{X,Y}(x,y)}{\rho_Y(y)}\\
+\rho_{Y|X=x}(y) = \frac{\rho_{X,Y}(x,y)}{\rho_X(x)}
 \end{align*}
 die \defw{bedingte Dichte} von $X$ unter $Y=y$ bzw. $Y$ unter $X=x$.
 \end{definition}
@@ -124,5 +124,5 @@ der \link{satz:bayes}{Satz von Bayes} für diskrete bzw. stetige Zufallsvektoren
 formuliert werden:
 \begin{align*}
 p_{ij} = P(Y=y_j|X=x_i)\cdot p_{i.}\\
-\rho_{(X,Y)} = \rho_{Y|X=x}(y)\cdot\rho_X(x)
+\rho_{X,Y} = \rho_{Y|X=x}(y)\cdot\rho_X(x)
 \end{align*}

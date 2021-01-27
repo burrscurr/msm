@@ -1,3 +1,8 @@
+\subsection{Erwartungswert}
+
+Der Erwartungswert beschreibt die Zahl, die eine Zufallsvariable im Mittel
+annimmt.
+
 \begin{definition}{Erwartungswert}{ewert}
 Sei $X$ eine \link{def:zvar}{Zufallsvariable} mit Zustandsraum $S=\{x_0, x_1,
 ...\}$ und Einzelwahrscheinlichkeiten $p_k=P(X=x_k)$. Dann heißt
@@ -9,42 +14,52 @@ $\rho_X$, gilt:
 \[
 \E(X) =\langle X\rangle := \int x\cdot\rho_X(x)\mathrm{d}x
 \]
+Oft wird $\mu$ als Zeichen für den Erwartungswert verwendet.
 \end{definition}
 
-\begin{definition}{Varianz}{varianz}
-Sei $X$ eine \link{def:zvar}{Zufallsvariable} mit Zustandsraum $S=\{x_0, x_1,
-...\}$ und Einzelwahrscheinlichkeiten $p_k=P(X=x_k)$. Dann heißt
-\[
-\Var(X) := \sum_k (x_k - \E(X))^2
-\]
-Variaanz von $X$.
-\end{definition}
-
-Die Varianz ist ein Maß der Streuung einer Zufallsvariable. Sie lässt sich auch
-berechnen durch:
-\[
-\Var(X) = \E((X-\E(X))^2)
-\]
-Für Erwartungswert und Varianz von Zufallsvariablen $X$, $Y$ und $a,b\in\R$ gelten
+\begin{theorem}{Rechenregeln Erwartungswert}{ewert}
+Für den Erwartungswert von Zufallsvariablen $X$, $Y$ und $a,b\in\R$ gelten
 folgende Rechenregeln:
 \begin{align*}
 \E(aX+b) &= a\E(X) + b \\
-\E(X+Y) &= \E(X) + \E(Y) \\
-\Var(aX+b) &= a^2 \Var(X) \\
-\Var(X) &= \E(X^2) - \E(X)^2
+\E(X+Y) &= \E(X) + \E(Y)
 \end{align*}
-
-Im Gegensatz zum Erwartungswert gilt für die Varianz $\Var(X+Y) \ne \Var(X) +
-\Var(Y)$.
+\end{theorem}
 
 \begin{theorem}{Markov inequality}{markov-inequality}
 Sei $X$ eine stetige \link{def:zvar}{Zufallsvariable}, $f$ eine Funktion mit
 $f(X)\ge 0$ und existierndem und endlichem Erwartungswert $\E(f(X))$. Dann gilt:
 \[
-P(f(X)\ge a)\le \frac{\E(f(x))}{a},\quad a\in\R
+P\big(f(X)\ge a\big)\le \frac{\E(f(x))}{a},\quad a\in\R
 \]
 \end{theorem}
-Ein Spezialfall dieser Ungleichung ist:
+
+
+\subsection{Varianz}
+
+Die Varianz ist ein Maß der Streuung einer Zufallsvariable, also wie sehr die
+Werte verteilt sind.
+
+\begin{definition}{Varianz}{varianz}
+Sei $X$ eine \link{def:zvar}{Zufallsvariable} mit Zustandsraum $S=\{x_0, x_1,
+...\}$ und Einzelwahrscheinlichkeiten $P(X=x_k)$. Dann heißt
+\[
+\Var(X) := \sum_k (x_k - \E(X))^2
+\]
+Variaanz von $X$. Oft wird $\sigma^2$ als Zeichen für die Varianz verwendet.
+\end{definition}
+
+\begin{theorem}{Rechenregeln Varianz}{varianz}
+Seien $X$, $Y$ Zufallsvariablen und $a,b\in\R$. Dann gelten folgende Rechenregeln:
+\begin{align*}
+\Var(aX+b) &= a^2 \Var(X) \\
+\Var(X) &= \E(X^2) - \E(X)^2
+\end{align*}
+\end{theorem}
+
+Im Gegensatz zum Erwartungswert gilt für die Varianz im Allgemeinen
+$\Var(X+Y) \ne \Var(X) + \Var(Y)$.
+
 \begin{theorem}{Ungleichung von Tschebyscheff}{tschebyscheff}
 Sei $X$ eine Zufallsvariable mit $\E(X) = \mu$ und $\Var(X) = \sigma^2$. Dann
 gilt:
@@ -52,6 +67,71 @@ gilt:
 \forall c>0: P(|X-\mu|\ge c) \le\frac{\sigma^2}{c^2}
 \]
 \end{theorem}
+
+
+\subsection{Kovarianz}
+
+Die Kovarianz ist ein Maß der gemeinsamen Streuung zweier Zufallsvariablen.
+
+\begin{definition}{Kovarianz}{kovarianz}
+Sei $\zvec{X} = (X,Y)^\T$ eine Zufallsvektor. Dann heißt
+\[
+\Cov(X,Y) = \E(X\cdot Y) - \E(X)\cdot\E(Y)
+\]
+\defw{Kovarianz} von $X$ und $Y$.
+\end{definition}
+
+\begin{definition}{Kovarianzmatrix}{kovarianz-matr}
+Seien $X_1, X_2, \ldots, X_n$ Zufallsvariablen. Die Matrix
+\[
+\Cov(\zvec{X}) = \begin{pmatrix}
+  \Var(X_1) & \Cov(X_1,X_2) & \ldots & \Cov(X_1, X_n) \\
+  \Cov(X_2,X_1) & \Var(X_2)  & \ldots  & \Cov(X_2, X_n) \\
+    \vdots  &     \vdots   &  \ddots   &    \vdots      \\
+  \Cov(X_n,X_1) & \Cov(X_n,X_2) & \ldots & \Var(X_n)
+\end{pmatrix}
+\]
+heißt \defw{Kovarianzmatrix} von $\zvec{X}$.
+\end{definition}
+
+\begin{theorem}{Rechenregeln Kovarianz}{kovarianz}
+Seien $X$ und $Y$ Komponenten des Zufallsvektors $\zvec{X}=(X,Y)^\T$ und
+$a,b\in\R$. Dann gelten folgende Rechenregeln:
+\begin{align*}
+\Cov(X, Y) &= \Cov(Y,X) \\
+\Cov(X + a, Y + b) &= \Cov(X,Y) \\
+\Cov(a\cdot X, b\cdot Y) &= ab\cdot\Cov(X,Y) \\
+\Cov(X, X) &= \Var(X) \\
+|\Cov(X,Y)| &\le \sqrt{\Var(X)\cdot\Var(Y)} \tag{Schwarz'sche Ungleichung}
+\end{align*}
+\end{theorem}
+
+
+\subsection{Korrelation}
+
+Varianz und Kovarianz können unter anderem als Maß für die Korrelation zwischen
+zwei Zufallsvariablen verwendet werden (das heißt wie sehr sich die
+Zufallsvariablen "`gleich"' verhalten):
+\begin{definition}{Korrelationskoeffizient}{korr}
+Sei $\zvec{X}=(X,Y)^\T$ ein Zufallsvektor. Dann heißt
+\[
+f_{X,Y} = \frac{\Cov(X,Y)}{\sqrt{\Var(X)\cdot\Var(Y)}}
+\]
+\defw{Korrelationskoeffizient} von $X$ und $Y$.
+\end{definition}
+
+\begin{theorem}{Rechenregeln Korrelation}
+Seien $X$ und $Y$ Zufallsvariablen mit Korrelationskoeffizient $f_{X,Y}$.
+Dann gelten folgende Rechenregeln:
+\begin{align*}
+|f_{X,Y}| &\le 1 \\
+X,Y \text{unabhängig} &\implies f_{X,Y} = 0 \\
+|f_{X,Y}| = 1 &\implies \exists a,b\in\R, b\ne0: Y=a\cdot X + b \tag{Perfekter
+linearer Zusammenhang}
+\end{align*}
+\end{theorem}
+
+\subsection{Standardisierung}
 
 \begin{definition}{Standardisierte Zufallsvariable}{std}
 Sei $X$ eine Zufallsvariable mit $\E(X) = 0$ und $Var(X) = 1$. Dann heißt $Z$

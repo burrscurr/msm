@@ -16,23 +16,23 @@ Beispiele, Erklärungen und Beweise cool.
 
 ## Fortschritt
 
-- ⭕ Grundlagen der Wahrscheinlichkeitstheorie
+- ✅ Grundlagen der Wahrscheinlichkeitstheorie
 - ✅ ├ Grundbegriffe
 - ✅ ├ Unabhängigkeit, bedingte Wahrscheinlichkeit
 - ✅ ├ Zufallsvektoren
 - ✅ ├ Erwartungswert, Varianz
-- ⭕ └ Covarianz, Korrelationskoeffizient
+- ✅ └ Kovarianz, Korrelationskoeffizient
 - ✅ Wahrscheinlichkeitsverteilungen
 - ✅ ├ Diskrete Verteilungen
 - ✅ └ Stetige Verteilungen
-- ⭕ Erzeugung von Zufallszahlen
-- ⭕ ├ Inversionsmethode (diskret)
-- ✅ ├ Inversionsmethode (stetig)
+- ✅ Erzeugung von Zufallszahlen
+- ✅ ├ Diskrete Zufallszahlen
+- ✅ ├ Inversionsmethode
 - ✅ ├ Annahme-Verwerfungs-Methode
 - ✅ ├ Importance Sampling
 - ✅ ├ Box-Muller-Polarmethode
-- ⭕ ├ Erzeugung von Zufallsvektoren
-- ⭕ └ Mehrdimensionale Normalverteilung
+- ✅ ├ Erzeugung von Zufallsvektoren
+- ✅ └ Mehrdimensionale Normalverteilung
 - ⭕ Monte-Carlo (Skriptausschnitt in OPAL verfügbar)
 - ⭕ ├ Zentraler Grenzwertsatz
 - ⭕ ├ Satz von Moivre-Laplace

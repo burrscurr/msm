@@ -1,6 +1,82 @@
-Dieses Kapitel behandelt Grundlagen und Methoden zur Generierung von beliebig
-verteilten Zufallszahlen durch einen Zufallszahlengenerator mit gleichverteilten
-Zufallszahlen.
+Dieses Kapitel behandelt Methoden zur Generierung von diskreten und stetigen
+mit beliebiger Verteilung Zufallszahlen. Wir nehmen an, mehrere
+Pseudo-Zufallszahlengenerator (PRNG) $U_1, U_2, \ldots$ zur Verfügung zu haben,
+die unabhängig voneinander $U(0,1)$ verteilte Zufallszahlen erzeugen.
+
+PRNG sind nicht "`echt"' zufällig, da eine Folge von Zufallszahlen durch den
+Startwert des Generators bestimmt ist und damit auch reproduziert werden kann.
+Zusätzlich ist ein PRNG periodisch, sodass sich die generierten Zahlen ab einem
+bestimmten Punkt wiederholen. Trotz dieser Eigenschaften sind (gute) PRNG sehr
+gut für praktische Anwendungen geeignet, da sie sehr schnell Zufallszahlen
+erzeugen können und die erzeugten Zahlen bei einem zufälligen Startwert nicht
+von tatsächlich zufälligen Zahlen (z.B. bestimmt durch einen physikalischen
+Prozess) unterscheidbar sind.
+
+\section{Zufallszahlen mit diskreter Verteilung}
+
+Ziel ist es, zufällig Zahlen zu erzeugen, die wie die Zufallsvariable $X$ mit
+Zustandsraum $S = \{x_0, x_1, \ldots\}$ und zugehörigen Wahrscheinlichkeiten
+$p_k = P(X=x_k)$ verteilt sind. Wir bestimmen im Folgenden ein Verfahren, mit
+dem wir die Zufallszahlen $U_1\sim U(0,1)$ in die Zielverteilung umformen
+können.
+
+Das einfachste Vorgehen ist die proportionale Aufteilung des Intervalls $[0,1]$
+gemäß der Wahrscheinlichkeiten $p_k$. Jedem $p_k$ wird der Bereich von $s_{k-1}$
+bis $s_k$ zugewiesen, der genau $p_k$ breit ist:
+\[
+s_{k} = \sum_{i=0}^k p_k
+\]
+Fällt die von $U_1$ generierte Zufallszahl in das Intervall $(s_{k-1}, s_k)$, so
+wird $x_k$ ausgegeben. Damit werden Zufallszahlen in der Zielverteilung erzeugt.
+
+Folgender Algorithmus implementiert diese Methode und erzeugt $N$ wie $X$
+verteilte Zufallszahlen:
+
+\begin{algorithm}[h!]
+
+\For{$1$ \KwTo $N$}{
+  Setze $k=0$, $s=p_k$\;
+  Erzeuge $u\sim U(0,1)$\;
+  \While{$u > s$}{
+    Setze $k \leftarrow k+1$\;
+    Setze $s \leftarrow s+p_k$\;
+  }
+  Gib $x_k$ aus\;
+}
+
+\caption{Erzeugung diskreter Zufallszahlen}\label{algo:zz-diskret}
+\end{algorithm}
+
+Bei diesem Algorithmus sind in der inneren Schleife $\E(X)$ Durchläufe
+notwendig (zumindest sofern $x_0 = 0$, $x_1=1$, usw. gilt)
+um das $x_k$, in dessen Intervall $u$ fällt, zu finden.
+Besitzt $X$ einen großen Zustandsraum, kann das die Geschwindigkeit des
+Algorithmus erheblich verschlechtern.
+
+Man kann die Laufzeiteigenschaften jedoch
+verbessern, indem man $X$ auf eine Zufallsvariable $\hat{X}$ abbildet, deren
+Werte $\hat{x}_k$ nach $\hat{p}_k$ absteigend geordnet sind. Somit steigt die
+Wahrscheinlichkeit, bereits nach wenigen Durchläufen der inneren Schleife das
+richtige $\hat{x}_k$ gefunden zu haben.
+
+Die Idee hinter dem Algorithmus kann weiter verallgemeinert werden. Dafür
+betrachten wir die \link{def:quantilf}{Quantilfunktion} von $X$, die die
+\link{def:vertf-disk}{Verteilungsfunktion} umkehrt. Die Quantilfunktion gibt
+uns also für Werte zwischen $0$ und $1$ zurück, was das $x_k$ zwischen $s_{k-1}$
+und $s_k$ ist. Wir nutzen also (implizit) in Algorithmus \ref{algo:zz-diskret}
+bereits die Quantilfunktion.
+
+\begin{theorem}{Inversionsprinzip für diskrete Variablen}{invp}
+Sei $X$ eine diskrete Zufallsvariable mit \link{def:vertf-disk}{Verteilungsfunktion}
+$F_X$ und \link{def:quantilf}{Quantilfunktion}
+$F_X^{-1}$. Weiterhin sei $U$ eine $U(0,1)$-verteilte Zufallsvariable. Dann
+besitzt $F_X^{-1}(U)$ die gleiche Verteilung wie $X$, das heißt:
+\[
+P\big(F_X^{-1}(U)\le z\big) = F_X(z)
+\]
+\end{theorem}
+Das ist die Formalisierung von unserem Ansatz, die Wahrscheinlichkeiten $p_k$
+der Zufallsvariable $X$ proportional im Intervall $(0,1)$ zu betrachten.
 
 \section{Inversionsmethode}
 
@@ -8,10 +84,14 @@ Zufallszahlen.
 Sei $X$ eine stetige Zufallsvariable mit \link{def:dichte}{Dichte} $\rho_X$ und
 Zustandsraum $S$. Sind $a,b\in\R$ und $a \ne 0$, so besitzt die Zufallsvariable
 $Y = a\cdot X + b$ die Dichte
-\[\rho_Y(z) = \rho_X\Big(\frac{z-b}{a}\Big)\]
+\[
+\rho_Y(z) = \rho_X\Big(\frac{z-b}{a}\Big)
+\]
 Ist die Funktion $g:S\to\R$ streng monoton, so hat die Zufallsvariable $Y=g(X)$
 die Dichte
-\[\rho_Y(z) = \rho_X\big(g^{-1}(z)\big)\cdot\big|\big(g^{-1}\big)^\prime(z)\big|\]
+\[
+\rho_Y(z) = \rho_X\big(g^{-1}(z)\big)\cdot\big|\big(g^{-1}\big)^\prime(z)\big|
+\]
 \end{theorem}
 
 Die Wahrscheinlichkeitsdichte einer verteilte Zufallsvariable $Y$ kann auf die
@@ -26,7 +106,9 @@ Inverse der Verteilungsfunktion:
 Sei $U\sim U(0,1)$ eine gleichverteilte Zufallsvariable und $Y$ eine
 beliebige stetige Zufallsvariable mit \link{def:vertf}{Verteilungsfunktion}
 $F_Y$. Dann gilt:
-\[F_Y^{-1}(U) \sim Y\]
+\[
+F_Y^{-1}(U) \sim Y
+\]
 \end{theorem}
 
 \begin{example}{Exponentialverteilung}{exp}
@@ -46,15 +128,18 @@ F_X(z) = \begin{cases}
 \]
 Bei Einschränkung der Verteilungsfunktion auf den Zustandsraum $(0, \infty)$ von
 $X$ ergibt sich:
-\[F_X: (0,\infty)\to(0,1):x\mapsto1-\e^{-\alpha x}\]
-
+\[
+F_X: (0,\infty)\to(0,1):x\mapsto1-\e^{-\alpha x}
+\]
 Durch Umstellen ergibt sich folgende Vorschrift für die Umkehrfunktion:
-\[F_X^{-1}(y) = -\frac{1}{\alpha} \mathrm{ln}(1-y)\]
-
+\[
+F_X^{-1}(y) = -\frac{1}{\alpha} \mathrm{ln}(1-y)
+\]
 Damit können wir mit der Inversionsmethode aus einer gleichverteilten
 Zufallsvariable $U$ Zufallszahlen erzeugen, die wie $X$ verteilt sind:
-\[F_X^{-1}(U) = -\frac{1}{\alpha} \mathrm{ln}(1-U) \sim X\]
-
+\[
+F_X^{-1}(U) = -\frac{1}{\alpha} \mathrm{ln}(1-U) \sim X
+\]
 \end{example}
 
 Die Inversionsmethode ist ein effizientes Verfahren, um beliebig verteilte
@@ -79,14 +164,12 @@ X-Wert des Punkts ausgegeben. Damit entspricht die Wahrscheinlichkeit, dass ein
 bestimmter Wert als Zufallszahl ausgegeben wird, genau dem Wert der
 Wahrscheinlichkeitsdichte an diesem Punkt.
 
-Der folgende Algorithmus gibt eine Folge von Zufallszahlen in der gewünschten
+Der folgende Algorithmus gibt eine Folge von $N$ Zufallszahlen mit der gewünschten
 Verteilung aus:
 
 \begin{algorithm}[h!]
-\DontPrintSemicolon
-\LinesNumbered
 
-\While{1}{
+\For{$1$ \KwTo $N$}{
   Erzeuge $x\sim U(a,b)$\;
   Erzeuge $y\sim U(0,1)$\;
   \If{$y\cdot c \le \rho(x)$}{
@@ -127,10 +210,8 @@ das Invertieren in der Regel kein Problem).
 Der entsprechende Algorithmus sieht dann so aus:
 
 \begin{algorithm}[h!]
-\DontPrintSemicolon
-\LinesNumbered
 
-\While{1}{
+\For{$1$ \KwTo $N$}{
   Erzeuge $u\sim U(a,b)$\;
   Setze $x = H^{-1}(u)$\;
   Erzeuge $y\sim U(0,1)$\;
@@ -142,10 +223,10 @@ Der entsprechende Algorithmus sieht dann so aus:
 \caption{Annahme-Verwerfungs-Methode mit Importance Sampling}\label{algo:av-methode-is}
 \end{algorithm}
 
-\section{Erzeugung normalverteilter Zufallszahlen}
+\section{Normalverteilte Zufallszahlen}
 
 \begin{theorem}{Transformationssatz (2D)}{trafo-2d}
-Seien $\underline{X} = (X, Y)^T$ und $\underline{Z} = (S,T)^T$
+Seien $\zvec{X} = (X, Y)^\T$ und $\zvec{Z} = (S,T)^\T$
 \link{def:zvektor}{Zufallsvektoren} mit gemeinsamer Dichte
 $\rho_{X,Y}$ bzw. $\rho_{S,T}$. Weiterhin sei $g$ eine bijektive Funktion mit
 Umkehrfunktion $g^{-1}$, die beide Zufallsvektoren aufeinander
@@ -158,7 +239,7 @@ g^{-1}: \R^2\to\R^2: \begin{pmatrix}s\\t\end{pmatrix}\mapsto
   \begin{pmatrix}h_1(s,t)\\h_2(s, t)\end{pmatrix} =
   \begin{pmatrix}x\\y\end{pmatrix}
 \end{align*}
-Dann gilt für die Wahrscheinlichkeitsdichte von $\underline{Z}$:
+Dann gilt für die Wahrscheinlichkeitsdichte von $\zvec{Z}$:
 \[
 \rho_{S,T}(s,t) = \rho_{X,Y}\big(g^{-1}(s,t)\big)\cdot\Det(J) =
   \rho_{X,Y}(h_1(s,t), h_2(s,t)) \cdot \Det(J)
@@ -243,13 +324,11 @@ Transformation angewandt werden.
 \medskip
 Damit ergibt sich folgender Algorithmus zur Erzeugung von unabhängigen,
 normalverteilten Zufallszahlen $X~N(\mu, \sigma^2)$. Der Algorithmus erzeugt
-immer Paare von normalverteilten Zufallszahlen:
+$N$ Paare von normalverteilten Zufallszahlen:
 
 \begin{algorithm}[h!]
-\DontPrintSemicolon
-\LinesNumbered
 
-\While{1}{
+\For{$1$ \KwTo $N$}{
   Erzeuge $u\sim U(0,1)$\;
   Erzeuge $v\sim U(0,1)$\;
   Setze $z_1 = \sqrt{-2\,\ln(1-u)}\cdot\cos(2\pi\cdot v)$\;
@@ -269,13 +348,11 @@ Die Polarmethode ist eine weitere Methode zur Erzeugung normalverteilter
 Zufallszahlen, die die Auswertung von trigonometrischen Funktionen und des
 Logarithmus vermeidet und daher schneller als die Box-Muller-Methode ist.
 
-Der folgende Algorithmus implementiert die Polarmethode:
+Der folgende Algorithmus beschreibt die Polarmethode:
 \begin{algorithm}[h!]
-\DontPrintSemicolon
-\LinesNumbered
 \SetKw{Continue}{continue}
 
-\While{1}{
+\For{$1$ \KwTo $N$}{
   Erzeuge $u\sim U(0,1)$\;
   Erzeuge $v\sim U(0,1)$\;
   Setze $x=2u-1$\;
@@ -296,6 +373,86 @@ Der folgende Algorithmus implementiert die Polarmethode:
 \label{algo:box-muller-marsaglia}
 \end{algorithm}
 
-\section{Erzeugung mehrdimensionaler Zufallszahlen}
+\section{Mehrdimensionale Zufallszahlen}
 
-TODO
+Bei der Erzeugung von Zufallsvektoren müssen die bedingte Abhängigkeiten
+zwischen den jeweiligen Zufallsvariablen berücksichtigt werden.
+
+Zufallsvektoren können in mehreren Schritten komponentenweise erzeugt werden.
+
+Sei $\zvec{X} = (X,Y)^\T$ ein \link{def:zvektor}{Zufallsvektor} mit
+\link{def:vert-zvektor}{Einzelwahrscheinlichkeiten} $p_{ij}$. Zuerst erzeugen
+wir die erste Komponente des Vektors gemäß der \link{def:randv}{Randverteilung}
+von $X$. Entsprechend dieser Verteilung wird mit einer geeigneten Methode
+(Inversionsmethode, Annahme-Verwerfungs-Methode o.Ä.) ein $x$ ermittelt.
+
+Durch die Randverteilung von $X$ können wir die \link{def:bedd}{bedingte
+Einzelwahrscheinlichkeit} von $Y$, also $P(Y=y_i|x)$ bestimmt werden und ein
+$y$ gemäß der Verteilung zufällig ermittelt werden.
+
+Auf diese Weise können n-dimensionale Zufallszahlen erzeugt werden.
+
+\subsection{Mehrdimensional normalverteilte Zufallszahlen}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=10cm]{normal-2d}
+\caption{Visualisierung einer zweidimensionalen Normalverteilung}
+\end{figure}
+
+\begin{definition}{Mehrdimensionale Normalverteilung}{ndim-normal}
+Sei $\zvec{X} = (X_1, \ldots,X_d)^\T$ ein Zufallsvektor,
+$\vec{\mu} = (\mu_1, \ldots, \mu_d)^\T \in\R^d$ ein Vektor der
+Erwartungswerte und $\Sigma = (\sigma_{ij})_{i,j=1,\ldots,d}$
+\link{def:kovarianz-matr}{Kovarianzmatrix} von $\zvec{X}$. Besitzt der
+Zufallsvektor die Dichte
+\[
+\rho_{\zvec{X}} = \frac{1}{\sqrt{(2\pi)^d\cdot\det\Sigma}}\cdot
+  \exp\Big(-\frac{1}{2}(\vec{x} - \vec{\mu})^\T\ \Sigma^{-1}(\vec{x}-\vec{\mu})\Big)
+\]
+so heißt er $\zvec{X}$ \defw{normalverteilt} (Schreibweise: $\zvec{X}\sim
+N_d(\vec\mu,\Sigma)$). Jede Komponente des Vektors ist normalverteilt, das heißt
+es gilt $\forall 0\le i\le d: X_i \sim N(\mu_i,\sigma_{ii})$.
+\end{definition}
+
+\begin{theorem}{Transformation einer mehrdimensionalen
+Normalverteilung}{trafo-normal-ndim}
+Sei $\zvec{X}$ ein normalverteilter Zufallsvektor von $d$ Komponenten mit
+Erwartungswertvektor $\vec\mu$ und Kovarianzmatrix $\Sigma$. Sei $A$ eine
+$n\times d$-Matrix ($n\in\N$). Dann ist die Transformation $\zvec{Y}= A\zvec{X}$
+wieder normalverteilt mit
+\begin{align*}
+\E(\zvec{Y}) &= A\vec\mu \\
+\Cov(\zvec{Y}) &= A\Sigma A^\T
+\end{align*}
+\end{theorem}
+
+Diesen Satz können wir für die Erzeugung mehrdimensionaler Normalverteilungen
+verwenden. Dafür erzeugen wir einen Zufallsvektor $\zvec{X} \sim
+N_d(\vec{0},\mathds{1})$,
+den wir so mit einer zu bestimmenden Matrix $A$ transformieren, dass gilt:
+\[
+\Cov(A\zvec{X}) = A\cdot \mathds{1}\cdot A^\T = A\cdot A^\T
+\]
+
+Dadurch ergibt sich folgender Algorithmus für die Erzeugung von $N$
+wie $N_d(\vec\mu, \Sigma)$ verteilten Zufallsvektoren:
+\begin{algorithm}[h!]
+
+Finde $A\in\R^{(d\times d)}$ sodass $A\cdot A^\T = \Sigma$\;
+
+\For{$1$ \KwTo $N$}{
+  Erzeuge $z_1, \ldots,z_d$ unabhängig verteilt wie $N(0,1)$\;
+  Setze $(x_1, \ldots, x_d)^\T = \vec\mu + A\cdot (z_1, \ldots, z_d)^\T$\;
+  Gib $(x_1, \ldots, x_d)^\T$ aus\;
+}
+
+\caption{Erzeugung von normalverteilten Zufallsvektoren}
+\label{algo:zz-normal-ndim}
+\end{algorithm}
+
+Um $z_1, \ldots, z_d$ zu erzeugen kann zum Beispiel die
+\link{algo:box-muller-marsaglia}{Polarmethode} verwendet werden. Die Bestimmung
+der Matrix $A$ entspricht der sogenannten Matrixwurzel von $\Sigma$, die durch
+die Orthonormalbasis der Eigenvektoren bestimmt werden
+kann\more{wiki-matrixwurzel}.
