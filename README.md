@@ -33,9 +33,9 @@ Beispiele, Erklärungen und Beweise cool.
 - ✅ ├ Box-Muller-Polarmethode
 - ✅ ├ Erzeugung von Zufallsvektoren
 - ✅ └ Mehrdimensionale Normalverteilung
-- ⭕ Monte-Carlo (Skriptausschnitt in OPAL verfügbar)
-- ⭕ ├ Zentraler Grenzwertsatz
-- ⭕ ├ Satz von Moivre-Laplace
+- ✅ Monte-Carlo (Skriptausschnitt in OPAL verfügbar)
+- ✅ ├ Zentraler Grenzwertsatz
+- ✅ ├ Satz von Moivre-Laplace
 - ⭕ └ Anwendungsbeispiele
 - ✅ Markov-Ketten
 - ✅ ├ Definition
