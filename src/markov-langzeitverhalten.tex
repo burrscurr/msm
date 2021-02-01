@@ -64,63 +64,57 @@ Spalte der Matrix einer Gleichung entspricht.
 
 \newcommand{\lzv}{\Pi^\infty} % Langzeitverhalten
 
-Bei Nichtergodischen Markovketten ist das Langzeitverhalten nicht so einfach
-bestimmbar, da die stationäre Verteilung vom Startzustand abhängt. Das
-Langzeitverhalten der Markovkette wird durch die Matrix $\lzv$ beschrieben,
-die für jeden möglichen Startzustand die entsprechende Langzeitverteilung
-angibt.
+Das Langzeitverhalten von nichtergodischen Markovketten hängt von Startzustand
+ab. Es wird in der Matrix $\lzv$ zusammengefasst, die jedem Startzustand die auf
+lange Sicht zu erwartende Verteilung zuordnet. Die Regeln zur Bestimmung des
+Langzeitverhaltens unterscheiden sich je nach dem ob der Startzustand in
+einer \link{def:mk-abg}{abgeschlossenen} oder \link{def:mk-trans}{transienten}
+Klasse liegt.
 
 \medskip
-Sei $(X)_{n\in N_0}$ eine Markovkette mit endlichem Zustandsram $S$ und
-\link{def:mk-matr}{Übergangsmatrix} $\Pi$, wobei $T\subseteq S$ die Menge aller
-\link{def:mk-trans}{transienten} Zustände ist. Es gelten die nachfolgende Regeln
-zur Bestimmung des Langzeitverhaltens.
+Im Folgenden sei $(X)_{n\in N_0}$ eine Markovkette mit endlichem Zustandsram $S$
+und \link{def:mk-matr}{Übergangsmatrix} $\Pi$.
 
-In einer \link{def:mk-abg}{abgeschlossenen} Klasse $C$ kann das
-Langzeitverhalten als \link{def:mk-stat}{stationäre Verteilung}
-$\stat^{(C)}$ der auf die Zustände in $C$ beschränkten Markovkette bestimmt
-werden (vergleiche \eqref{eq:stat-lgs}):
-\begin{equation}\label{eq:lzv-abg-abg}
-  \forall x,y\in C: \lzv(x,y) = \stat^{(C)}(y)
-\end{equation}
-Da eine \link{def:mk-abg}{abgeschlossene} Klasse $C$ nicht
-verlassen werden kann, gilt für $x\in C$ und $y \notin C$:
-\begin{equation}\label{eq:lzv-abg-x}
-  \lzv(x,y) = 0
-\end{equation}
-Damit ist das Langzeitverhalten der Startzustände in abgeschlossenen Klassen
-bestimmt.
+Das Langzeitverhalten bei Start in einem Zustand einer
+\link{def:mk-abg}{abgeschlossenen} Klasse $C$ entspricht der
+\link{def:mk-stat}{stationäre Verteilung} $\stat^{(C)}$ der auf die Zustände in
+$C$ beschränkten Markovkette (siehe \eqref{eq:stat-lgs}). Der Übergang in einen
+Zustand außerhalb der Klasse $C$ ist ausgeschlossen. Für $x, x' \in C$ und
+$y\notin C$ gilt:
+\begin{align}\label{eq:lzv-abg-abg}
+  \lzv(x,x') &= \stat^{(C)}(x') \\
+  \label{eq:lzv-abg-x}
+  \lzv(x,y) &= 0
+\end{align}
 
 \medskip
-Das Langzeitverhalten bei Start in einem \link{def:mk-trans}{transienten}
-Zustand $t\in T$ muss die
-Wahrscheinlichkeit der Absorption durch eine abgeschlossene Klasse $C$
-berücksichtigt werden, die mit $p_{abs}(t,C)$ bezeichnet wird. Die
-Absorptionswahrscheinlichkeit berechnet sich rekursiv als Wahrscheinlichkeit des
-direkten Übergangs in die absorbierende Klasse plus die Wahrscheinlichkeit des
-indirekten Übergangs mit einem zusätzlichen Schritt innerhalb der transienten
-Klasse:
+
+Da \link{def:mk-trans}{transiente} Klassen nur verlassen, aber nicht in sie
+zurückgekehrt werden kann, ist die langfristige Wahrscheinlichkeit, sich in
+einem transienten Zustand zu befinden, null. Die Wahrscheinlichkeit, bei Start
+in einem transienten Zustand $t$ langfristig in die abgeschlossene Klasse $C$
+überzugehen, wird mit $p_{t\to C}$ bezeichnet \warn{andere Schreibweise als in
+der Vorlesung}. Diese sogenannte Absorptionswahrscheinlichkeit verteilt sich
+dann innerhalb von $C$ gemäß der berechneten stationären Verteilung.
+
+Seien $x,x'$ transiente Zustände und $y$ Zustand einer
+abgeschlossenen Klasse $C$. Dann gilt:
+\begin{align}
+  \label{eq:lzv-trans-abg}
+  \lzv(x,y) &= p_{t\to C}\cdot\stat^{(C)}(y) \\
+  \label{eq:lzv-trans-trans}
+  \lzv(x,x') &= 0
+\end{align}
+
+Die Absorptionswahrscheinlichkeiten von Zuständen einer transienter Klasse $T$
+bezüglich des Übergangs in die abgeschlossene Klasse $C$ bilden ein
+lineares Gleichungssystem. Jede Gleichung für $t\in T$ ergibt sich
+aus der Wahrscheinlichkeit des direkten Überangs in $C$ und der
+Wahrscheinlichkeit, indirekt über die anderen Zustände von $T$ in $C$
+überzugehen:
 \[
-p_{abs,t}(C) = \sum_{y\in C} \Pi(x,y) + \sum_{z\in T}\Pi(x,z)\cdot p_{abs,z} \\
+p_{t\to C} = \sum_{c\in C} \Pi(t,c) + \sum_{t'\in T}\Pi(t,t')\cdot p_{t'\to C}
 \]
-Für alle $t$ einer transienten Klasse entsteht so ein Gleichungssystem.
-
-Die Wahrscheinlichkteit, bei Start in $t$ in $y\in S$ zu
-enden, berechnet sich durch die Absorptionswahrscheinlichkeit verknüpft mit
-der stationären Wahrscheinlichkeit $\stat^{(C)}$ innerhalb von $C$:
-\begin{equation}\label{eq:lzv-trans-abg}
-\lzv(x,y) = p_{abs,t}(C)\cdot\stat^{(C)}(y)
-\end{equation}
-Die Wahrscheinlichkeit, sich in einem \link{def:mk-trans}{transienten}
-Zustand zu befinden, sinkt auf lange Sicht auf 0:
-\begin{equation}\label{eq:lzv-trans-trans}
-\forall x\in S, y\in T: \lzv(x, y) = 0
-\end{equation}
-Damit ist das Langzeitverhalten für den Start in einem transitiven Zustand
-definiert.
-Da in endlichen Markovketten alle abgeschlossenen Klassen rekurrent sind
-\warn{Begründung bzw. Beweis fehlt}, sind
-durch die obigen Definitionen das Langzeitverhalten bestimmt.
 
 \begin{example}{Langzeitverhalten einer nichtergodischen Markovkette}{mk-lzv-nerg}
 Gegeben sei folgende Markovkette:
