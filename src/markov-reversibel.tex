@@ -1,0 +1,110 @@
+\begin{definition}{Detailled Balance, Reversibilität}{mk-rev}
+Sei $(X)_{n\in N_0}$ eine Markovkette mit Zustandsraum $S$, Übergangsmatrix
+$\Pi$ und $\pi$ eine \link{def:mk-vert}{Verteilung}. Dann heißt $\pi$
+\defw{reversibel}, wenn gilt:
+\[
+\forall x,y\in S:\ \pi(y)\cdot\Pi(y,x) = \pi(x)\cdot\Pi(x,y)
+\]
+Diese Bedingung wird auch als \defw{detailled Balance} bzw. als
+\defw{detailliertes Gleichgewicht} bezeichnet.
+
+Eine Markovkette mit reversibler Verteilung wird als \defw{reversibel}
+bezeichnet.
+\end{definition}
+
+In einer reversiblen Markovkette kann also nicht unterschieden werden, ob der
+Prozess vorwärts oder rückwärts abläuft\more{yt-detailled-balance}. Für jedes
+Zustandspaar wird – intuitiv ausgedrückt – in beiden Richtungen die gleiche
+Wahrscheinlichkeitsdichte übertragen.
+
+Liegt für eine Verteilung ein solches Gleichgewicht (detailled balance) vor,
+ändert sich die Verteilung auch nach zusätzlichen Zeitschritten nicht.
+Deshalb gilt folgender Satz:
+
+\begin{theorem}{}{mk-db}
+Sei $\pi$ eine Verteilung einer Markovkette, die die Bedingung der
+detailled balance erfüllt. Dann ist $\pi$ eine
+\link{def:mk-stat}{stationäre Verteilung}.
+\end{theorem}
+
+Reversibilität ist eine stärkere Bedinung als Stationarität, es gibt also
+stationäre Verteilungen, die nicht die Bedingung der detaillierten Balance
+erfüllen.
+
+\begin{theorem}{Schnittprinzip}{mk-schnittp}
+Sei $(X)_{n\in N_0}$ eine \link{def:mk-ergod}{ergodische} Markovkette. Ist der
+\link{def:mk-igraph}{Interaktionsgraph} von $(X)$ linear, das jeder Schnitt
+zwischen zwei verbundenen Zuständen zerlegt den Graph in zwei disjunkte und
+unverbundene Teile, so ist die stationäre Verteilung immer reversibel.
+\end{theorem}
+
+Da wir wissen, dass eine ergodische Markovkette immer genau eine stationäre
+Verteilung besitzt (Satz \ref{satz:ergod}), folgt aus dem Schnittprinzip, dass
+diese Verteilung auch reversibel ist. Dann können wir für die Verteilung die
+detaillierten Balance annehmen. Das ist besonders hilfreich, wenn der
+betrachtete Prozess sehr viele Zustände besitzt und die stationäre Verteilung
+aufwändig zu berechnen ist.
+
+\begin{example}{Warteschlange}{}
+Ein bestimmter Server kann bis zu 100 Anfragen parallel bearbeiten. Pro Sekunde
+erhält der Server mit Wahrscheinlichkeit $p^+ = 0.2$ eine neue Anfrage und schließt
+mit Wahrscheinlichkeit $p^-=0.21$ eine Anfrage ab. Werden bereits 100 Anfragen
+bearbeitet, werden neue Anfragen abgewiesen.
+
+\emph{Wie hoch ist die Wahrscheinlichkeit, dass ein ankommender Auftrag abgewiesen
+wird? Wie hoch ist die Wahrscheinlichkeit, dass die Maschine leerläuft?}
+
+Die Anzahl der aktiven Anfragen kann durch eine Markovkette mit Zustandsraum
+$S=\{0, 1,\ldots, 100\}$ beschrieben werden:
+
+\medskip
+\begin{tikzpicture}
+  \node[v] (0) at (0,1) {0};
+  \node[v] (1) at (2,1) {1};
+  \node[v] (2) at (4,1) {2};
+  \node[v] (n) at (6, 1) {$\ldots$};
+  \node[v] (99) at (8,1) {99};
+  \node[v] (100) at (10,1) {100};
+
+  \draw[e] (0) to[loop left] node[anchor=south] {$p^-$} ();
+  \draw[e] (100) to[loop right] node[anchor=south] {$p^+$} ();
+  \draw[e] (0) to[bend left] node[anchor=south] {$p^+$} (1);
+  \draw[e] (1) to[bend left] node[anchor=north] {$p^-$} (0);
+  \draw[e] (1) to[bend left] node[anchor=south] {$p^+$} (2);
+  \draw[e] (2) to[bend left] node[anchor=north] {$p^-$} (1);
+  \draw[e] (2) to[bend left] node[anchor=south] {$p^+$} (n);
+  \draw[e] (n) to[bend left] node[anchor=north] {$p^-$} (2);
+  \draw[e] (n) to[bend left] node[anchor=south] {$p^+$} (99);
+  \draw[e] (99) to[bend left] node[anchor=north] {$p^-$} (n);
+  \draw[e] (99) to[bend left] node[anchor=south] {$p^+$} (100);
+  \draw[e] (100) to[bend left] node[anchor=north] {$p^-$} (99);
+\end{tikzpicture}
+
+Die Markovkette besteht nur aus einer einzigen Klasse, ist daher abgeschlossen,
+rekurrent und irreduzibel. Da die Zustände 0 und 100 Periode 1 besitzten, ist
+die Markovkette aperiodisch. Folglich ist die Markovkette auch ergodisch, es
+existiert also eine eindeutige stationäre Verteilung $\stat$.
+
+Diese Verteilung ist wegen der 101 Zustände sehr aufwändig zu berechnen. Wir
+können jedoch das Schnittprinzip (Satz \ref{satz:mk-schnittp}) anwenden, da der
+Interaktionsgraph der Markovkette linear ist. Das bedeutet, dass für die
+stationäre Wahrscheinlichkeit die Bedingung der detaillierten Balance gilt:
+\begin{align*}
+\forall x,y\in S:\ &\pi(y)\cdot\Pi(y,x) = \pi(x)\cdot\Pi(x,y) \\
+\implies&\stat(i)\cdot p^+ = \stat(i+1)\cdot p^- \\
+\implies&\stat(i+1) = \frac{p^+}{p^-}\cdot\stat(i) \\
+\implies&\stat = (c, c\cdot\gamma,c\cdot\gamma^2,\ldots,
+c\cdot\gamma^{100})^{\T},\ \gamma = \frac{p^+}{p^-}, c\in\R
+\end{align*}
+Da $\stat$ eine Verteilung ist, wissen wir dass die Einträge insgesamt 1
+ergeben. Damit kann $c$ bestimmt werden:
+\begin{align*}
+1 &= \sum_{i=0}^{100}c\cdot\gamma^i = c \sum_{i=0}^{100}\gamma^i \\
+\overset{\text{Geom. Summenformel}}{\iff} 1 &= c\cdot\frac{1-\gamma^{101}}{1-\gamma} \\
+\implies \stat(i) &= c\cdot\gamma^i = \frac{1-\gamma}{1-\gamma^{101}}\cdot \gamma^i
+\end{align*}
+
+Die Wahrscheinlichkeit, dass ein ankommender Auftrag abgewiesen wird, ist
+$\stat(100)=3.6\cdot10^{-4}$, der Server also bereits voll ausgelastet ist. Die
+Wahrscheinlichkeit für Leerlauf ist $\stat(0) = 4.79\cdot10^{-2}$.
+\end{example}
