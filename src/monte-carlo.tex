@@ -145,11 +145,21 @@ Das bedeutet insbesondere, dass der Erwartungswert einer Zufallsvariable durch d
 
 \section{Der zentrale Grenzwertsatz}
 
-Der zentrale Grenzwertsatz besagt, dass der Erwartungswert einer Zufallszahl für große $n$ Normalverteilt:
-
-\[\overline{X}_n \approx N(\mu, \frac{\sigma^2}{n})\]
-bzw.
-\[ \frac{\overline{X}_n -\mu_x}{\sigma_x} \cdot \sqrt{n} \approx N(0,1) \]
+\begin{theorem}{Zentraler Grenzwertsatz}{zgw}
+Seien $X_1, ..., X_n$ unabhängige Zufallsvariablen die einer beliebigen
+Verteilung mit Erwartungswert $\mu$ und Varianz $\sigma^2$ entsprechen. Dann
+gilt mit $n\to\infty$ für den arithmetischen Mittelwert
+$\overline{X}_n = \frac{1}{n}\sum_i^n X_n$
+\begin{align*}
+\overline{X}_n &\sim N(\mu, \frac{\sigma^2}{n}) \\
+\frac{\overline{X}_n -\mu}{\sigma} \cdot \sqrt{n} &\sim N(0,1)
+\end{align*}
+bzw. für die Summe $S_n = \sum_i^n X_n$
+\begin{align*}
+S_n &\sim N(n\mu, n\sigma^2) \\
+\frac{S_n -n\mu}{\sqrt{n}\sigma} &\sim N(0,1)
+\end{align*}
+\end{theorem}
 
 Abweichungen des Erwartungswertes können also mit den gleichen Methoden bestimmt und geschätzt werden, wie bei der Normalverteilung.
 Bei solchen Problemstellungen existieren drei Variablen, welche die Genauigkeit beschreiben:
