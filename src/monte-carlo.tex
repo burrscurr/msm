@@ -170,18 +170,17 @@ Bei solchen Problemstellungen existieren drei Variablen, welche die Genauigkeit 
   \epsilon&\: ...\: \text{Genauigkeit}\\
 \end{align*}
 
-Wenn in Aufgabenstellungen zwei dieser gegeben sind, ist es möglich die fehlende Variable zu bestimmen:
+Für die Abweichung von $\overline{X}_n$ zum Mittelwert $\mu$ gelten folgende
+Formeln:
 
 \begin{align*}
-  \text{Geg.:} \:  &n, \epsilon\\
-  \alpha &\ge 2-2\phi\left(\frac{\epsilon\sqrt{n}}{\sigma}\right)\\
-  \text{Geg.:} \:  &\alpha, \epsilon\\
+  \alpha &\ge 2-2\Phi\left(\frac{\epsilon\sqrt{n}}{\sigma}\right)\\
   n &\ge \left(Z_{1-\frac{\alpha}{2}}\frac{\sigma}{\epsilon}\right)^2\\
-  \text{Geg.:} \:  &n, \alpha\\
   \epsilon &\ge Z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}\\
 \end{align*}
 
-Hierbei ist $Z_{1-\frac{\alpha}{2}}$ das Quantil der Standardnormalverteilung mit dem Wert $1-\frac{\alpha}{2}$.
+Hierbei ist $Z_{1-\frac{\alpha}{2}}$ das \link{def:quantilf}{Quantil} der
+Standardnormalverteilung mit dem Wert $1-\frac{\alpha}{2}$.
 
 \section{Der Satz von Moivre-Laplace}
 
@@ -193,8 +192,8 @@ Die Parameter sind dann:
 Außerdem muss bei der Rechnung mit dieser Normalverteilung noch eine Stetigkeitskorrektur von $0.5$ eingefügt werden:
 
 \[P(a < Y \le b) \approx 
-  \phi\left(\frac{b+\mathbf{0.5}-np}{\sqrt{np(1-p)}}\right) - 
-  \phi\left(\frac{a+\mathbf{0.5}-np}{\sqrt{np(1-p)}}\right)\]
+  \Phi\left(\frac{b+\mathbf{0.5}-np}{\sqrt{np(1-p)}}\right) -
+  \Phi\left(\frac{a+\mathbf{0.5}-np}{\sqrt{np(1-p)}}\right)\]
 
 Die Faustregel für die Gültigkeit dieser Regel lautet:
 
